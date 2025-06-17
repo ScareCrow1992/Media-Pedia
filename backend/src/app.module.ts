@@ -8,6 +8,8 @@ import { ReviewsModule } from './reviews/reviews.module';
 import { ReportsModule } from './reports/reports.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { AdminModule } from './admin/admin.module';
+import { CastModule } from './cast/cast.module';
+import { DirectorModule } from './director/director.module';
 
 @Module({
   imports: [
@@ -26,7 +28,9 @@ import { AdminModule } from './admin/admin.module';
     MoviesModule,
     ReviewsModule,
     ReportsModule,
-    AdminModule
+    AdminModule,
+    CastModule,
+    DirectorModule
   ],
   controllers: [AppController],
   providers: [AppService],

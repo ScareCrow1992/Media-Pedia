@@ -1,6 +1,7 @@
 import { Controller, Get, Param, ParseIntPipe } from '@nestjs/common';
 import { MoviesService } from './movies.service';
 import { Movie } from './entities/movie.entity';
+import { MovieDetailDto } from './dto/movie-detail.dto';
 
 @Controller('movies')
 export class MoviesController {
@@ -10,9 +11,8 @@ export class MoviesController {
     @Get(':id')
     async getMovieById(
         @Param('id', ParseIntPipe) id: number,
-    ): Promise<Movie> {
+    ): Promise<MovieDetailDto> {
         return this.moviesService.findById(id);
     }
-
 
 }

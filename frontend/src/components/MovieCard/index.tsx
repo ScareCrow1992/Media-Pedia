@@ -9,7 +9,7 @@ type Props = {
 
 export default function MovieCard() {
     return (
-        <Link to ="/movies/12345">
+        <Link to ="/movies/1">
             <div className="inline-block bg-cyan-500 w-fit h-fit m-[0.5rem] p-[0.5rem]">
                 <div className="
                     relative rounded-lg overflow-hidden bg-zinc-500
