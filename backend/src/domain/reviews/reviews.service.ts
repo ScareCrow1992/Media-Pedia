@@ -67,7 +67,7 @@ export class ReviewsService {
             .getRawMany();
 
         const result: ReviewDto[] = rawReviews.map(ReviewDto.fromRaw);
-        console.log(result);
+        // console.log(result);
         return result;
         // await this.reviewRepository.find({
         //     where: { movie: { id: movieId } }, // movie는 relation 기준

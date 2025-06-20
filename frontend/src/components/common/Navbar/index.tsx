@@ -1,28 +1,57 @@
 // src/components/Navbar.tsx
+import { useState } from "react";
 import { Link, matchPath, useLocation } from "react-router-dom";
+import SignupModal from "../Modal/modals/SignupModal";
+import ModalBase from "../Modal/ModalBase";
+import LoginModal from "../Modal/modals/LoginMordal";
+import { useUserInfo } from "src/contexts/UserInfoContext";
+import LoginButton from "../LoginButton";
+import SignupButton from "../SignupButton";
 
 export default function Navbar() {
-    // const location = useLocation();
+  const { user } = useUserInfo();
 
-    // const isTransparentNav =
-    //     matchPath("/movies/:id", location.pathname) ||
-    //     matchPath("/drama/:id", location.pathname);
-    const isTransparentNav = false;
 
-    return (
-        <nav className={
-            `sticky top-0 z-30 flex items-center justify-between p-4
+  // const location = useLocation();
+
+  // const isTransparentNav =
+  //     matchPath("/movies/:id", location.pathname) ||
+  //     matchPath("/drama/:id", location.pathname);
+  const isTransparentNav = false;
+
+  return (
+    <>
+      <nav className={
+        `sticky top-0 z-30 flex items-center justify-between p-4
             ${isTransparentNav ? "" : "border-b border-zinc-400"}
             ${isTransparentNav ? "bg-transparent text-white" : "bg-white text-black"}
         `}>
 
-            <Link to="/" className="text-xl font-bold text-pink-500">
-                왓챠 클론
-            </Link>
-            <div className="flex space-x-4">
-                <Link to="/login" className="hover:underline">로그인</Link>
-                <Link to="/signup" className="hover:underline">회원가입</Link>
-            </div>
-        </nav>
-    );
+        <Link to="/" className="text-xl font-bold text-pink-500">
+          왓챠 클론
+        </Link>
+
+        <div className="flex space-x-4 items-center">
+          {
+            user ?
+              (
+                <>
+                  <span className="text-sm text-gray-700">{user.nickname}</span>
+                  <Link to={`/user/${user.id}`} className="bg-gray-200 px-3 py-1 rounded hover:bg-gray-300">
+                    프로필
+                  </Link>
+                </>
+              ) :
+              (
+                <>
+                  <LoginButton />
+                  <SignupButton />
+                </>
+              )
+          }
+        </div>
+
+      </nav>
+    </>
+  );
 }

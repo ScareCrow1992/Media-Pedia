@@ -8,3 +8,9 @@ export interface UserDTO{
   provider?: string;
   socialId?: string;
 }
+
+export interface UserProfileDTO{
+  id: number;
+  email: string;
+  nickname: string;
+}

@@ -23,8 +23,6 @@ export default function CastAndCrewSection() {
         queryFn: () => fetchCastsByMovie(id!)
     });
 
-
-
     if (isLoading) {
         return <div className="text-white text-center mt-10">로딩 중...</div>;
     }

@@ -5,7 +5,7 @@ import { UserDTO } from "./apis/user/types";
 import { fetchTesterLogin } from "./apis/user";
 import UserChanger from "./components/DBG/UserChanger";
 import { useState } from "react";
-import { UserInfoContext } from "./contexts/UserInfoContext";
+import { UserInfoContext, UserInfoProvider } from "./contexts/UserInfoContext";
 
 export default function Root() {
 
@@ -19,11 +19,15 @@ export default function Root() {
   });
 
   const [user, setUser] = useState<UserDTO | null>(null);
-  // console.log(users);
+  // console.log(setUser)
+  // console.log(user);
+  // console.log(env);
+
+  const cdnBaseUrl = process.env.REACT_APP_CDN_PATH;
 
   return (
 
-    <UserInfoContext.Provider value={{ user }}>
+    <UserInfoProvider>
       <div className="min-h-screen text-black">
         <Navbar />
         {
@@ -35,6 +39,6 @@ export default function Root() {
           <Outlet />
         </main>
       </div>
-    </UserInfoContext.Provider >
+    </UserInfoProvider >
   );
 }

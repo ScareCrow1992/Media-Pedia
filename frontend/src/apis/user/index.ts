@@ -9,7 +9,6 @@ export const fetchTesterLogin = async(): Promise<UserDTO[]> => {
     catch(error){
         console.log("Post 실패 : ", error);
         return [];
-    }
-
-    
+    }    
 }
+

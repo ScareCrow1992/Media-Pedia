@@ -29,7 +29,7 @@ export class ReviewDto {
             id: raw.id,
             rating: raw.rating,
             content: raw.content,
-            movie_id: raw.number,
+            movie_id: raw.movie_id,
             nickname: raw.nickname,
             is_liked: raw.is_liked,
             likes_count: raw.likes_count
