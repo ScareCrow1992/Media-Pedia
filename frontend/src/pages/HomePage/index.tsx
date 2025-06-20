@@ -1,12 +1,12 @@
-import HorizontalScroller from "../../components/HorizontalScrollerProps";
-import MovieCard from "../../components/MovieCard";
+import MovieCard from "src/components/common/MovieCard";
+import HorizontalScroller from "src/components/common/HorizontalScrollerProps";
+// import MovieCard from "../../components/common/MovieCard";
 
 
 
 export default function HomePage() {
     return (
         <div>
-
             <div className="flex">
                 <h1 className="text-xl font-bold p-4">왓챠피디아 HOT 랭킹</h1>
                 <button>
@@ -15,24 +15,51 @@ export default function HomePage() {
                     </svg>
                 </button>
             </div>
-            <HorizontalScroller />
+            <HorizontalScroller>
+                <MovieCard />
+                <MovieCard />
+                <MovieCard />
+                <MovieCard />
+                <MovieCard />
+                <MovieCard />
+            </HorizontalScroller>
+
 
             <div className="flex">
                 <h1 className="text-xl font-bold p-4">영화 공개 예정작</h1>
             </div>
-            <HorizontalScroller />
+            <HorizontalScroller>
+                <MovieCard />
+                <MovieCard />
+                <MovieCard />
+                <MovieCard />
+                <MovieCard />
+                <MovieCard />
+            </HorizontalScroller>
 
-            
             <div className="flex">
-                <h1 className="text-xl font-bold p-4">시리즈 공개 예정작</h1>
+                <h1 className="text-xl font-bold p-4">영화 공개 예정작</h1>
             </div>
-            <HorizontalScroller />
+            <HorizontalScroller>
+                <MovieCard />
+                <MovieCard />
+                <MovieCard />
+                <MovieCard />
+                <MovieCard />
+                <MovieCard />
+            </HorizontalScroller>
 
-            
             <div className="flex">
-                <h1 className="text-xl font-bold p-4">박스오피스 순위</h1>
+                <h1 className="text-xl font-bold p-4">영화 공개 예정작</h1>
             </div>
-            <HorizontalScroller />
+            <HorizontalScroller>
+                <MovieCard />
+                <MovieCard />
+                <MovieCard />
+                <MovieCard />
+                <MovieCard />
+                <MovieCard />
+            </HorizontalScroller>
         </div>
     );
 }

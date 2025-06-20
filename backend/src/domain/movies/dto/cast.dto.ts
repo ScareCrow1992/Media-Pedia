@@ -10,4 +10,11 @@ export class CastDto {
         dto.name = entity.name;
         return dto;
     }
+
+    static fromRaw(raw: any): CastDto {
+        return {
+            id: raw.id,
+            name: raw.name,
+        };
+    }
 }

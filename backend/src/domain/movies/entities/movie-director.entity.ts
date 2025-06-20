@@ -6,8 +6,8 @@ export class MovieDirector {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @Column({ name: 'director_name' })
-  directorName: string;
+  @Column()
+  director_id: number;
 
   @Column()
   movie_id: number;

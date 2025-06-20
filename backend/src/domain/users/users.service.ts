@@ -4,6 +4,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { User } from './entities/user.entity';
 import { CreateUserDto } from './dto/create-user.dto';
+import { UserDto } from './dto/user.dto';
 
 @Injectable()
 export class UsersService {
@@ -17,7 +18,13 @@ export class UsersService {
         return this.usersRepo.save(user);         // DB에 INSERT
     }
 
-    async findAll(): Promise<User[]> {
-        return this.usersRepo.find();
+    async findAll(): Promise<UserDto[]> {
+        const rawUsers = this.usersRepo
+            .createQueryBuilder('users')
+            .getMany();
+
+        const result: UserDto[] = (await rawUsers).map(UserDto.fromRaw);
+        return result;
+        // return this.usersRepo.find();
     }
 }

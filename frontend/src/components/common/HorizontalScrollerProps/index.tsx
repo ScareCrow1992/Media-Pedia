@@ -1,16 +1,14 @@
 import MovieCard from "../MovieCard";
 import { HorizontalScrollerProps } from "./type";
 
-const HorizontalScroller = () => {
-  return (
-    <div className="overflow-x-auto whitespace-nowrap p-4 scrollbar-hide">
+interface Props{
+  children: React.ReactNode;
+}
 
-          <MovieCard />
-          <MovieCard />
-          <MovieCard />
-          <MovieCard />
-          <MovieCard />
-          <MovieCard />
+export default function HorizontalScroller ({children}: Props) {
+  return (
+    <div className="flex overflow-x-auto whitespace-nowrap p-4 scrollbar-hide">
+          {children}
 
       {/* <div className="inline-block w-40 h-60 rounded-md bg-red-300 mr-4">Item 1</div>
       <div className="inline-block w-40 h-60 rounded-md bg-blue-300 mr-4">Item 2</div>
@@ -21,7 +19,6 @@ const HorizontalScroller = () => {
   );
 };
 
-export default HorizontalScroller;
 
 /*
 export default function HorizontalScroller({ title, children }: HorizontalScrollerProps) {

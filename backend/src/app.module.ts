@@ -5,6 +5,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { QueryModule } from './query/query.module';
 import { DomainModule } from './domain/domain.module';
 import { AdminModule } from './admin/admin.module';
+import { PipesModule } from './common/pipes/pipes.module';
 
 @Module({
   imports: [
@@ -20,7 +21,8 @@ import { AdminModule } from './admin/admin.module';
     }),
     AdminModule,
     QueryModule,
-    DomainModule
+    DomainModule,
+    PipesModule
   ],
   controllers: [AppController],
   providers: [AppService],

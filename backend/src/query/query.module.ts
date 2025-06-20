@@ -1,16 +1,15 @@
 import { Module } from '@nestjs/common';
 import { QueryService } from './query.service';
-
-import { MoviesModule } from 'src/domain/movies/movies.module';
-import { ReviewsModule } from 'src/domain/reviews/reviews.module';
-import { CastModule } from 'src/domain/cast/cast.module';
-import { DirectorModule } from 'src/domain/director/director.module';
-
-
+import { QueryController } from './query.controller';
+import { TypeOrmModule } from '@nestjs/typeorm';
+import { Movie } from 'src/domain/movies/entities/movie.entity';
+import { MovieCast } from 'src/domain/movies/entities/movie-cast.entity';
+import { Cast } from 'src/domain/movies/entities/cast.entity';
 
 @Module({
-  imports: [MoviesModule, ReviewsModule, CastModule, DirectorModule],
-  providers: [QueryService],
-  exports: [QueryService]
+  imports: [TypeOrmModule.forFeature([MovieCast, Cast])],
+  controllers: [QueryController],
+  providers: [QueryService]
 })
+
 export class QueryModule {}

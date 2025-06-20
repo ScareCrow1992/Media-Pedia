@@ -17,7 +17,6 @@ export class AdminMoviesController {
     return this.adminMoviesService.addCast(dto);
   }
 
-
   // admin/movies/director/
   @Post("director")
   async addDirector(@Body() dto: CreateMovie2DirectorDto): Promise<MovieDirector> {

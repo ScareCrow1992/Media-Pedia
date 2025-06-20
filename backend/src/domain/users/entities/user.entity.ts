@@ -1,3 +1,5 @@
+import { ReviewLike } from 'src/domain/reviews/entities/review-like.entity';
+import { ReviewReport } from 'src/domain/reviews/entities/review-report.entity';
 import {
     Entity,
     PrimaryGeneratedColumn,
@@ -5,6 +7,7 @@ import {
     CreateDateColumn,
     UpdateDateColumn,
     DeleteDateColumn,
+    OneToMany,
 } from 'typeorm';
 
 @Entity('users') // 테이블명 명시
@@ -41,4 +44,10 @@ export class User {
 
     @DeleteDateColumn({ name: 'deleted_at' })
     deletedAt?: Date;
+
+    @OneToMany(() => ReviewLike, (like) => like.review)
+    reviewLikes: ReviewLike[];
+
+    @OneToMany(() => ReviewReport, (report) => report.user)
+    reviewReports: ReviewReport[];
 }
