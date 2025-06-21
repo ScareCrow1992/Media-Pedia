@@ -1,3 +1,4 @@
+import { ApiProperty } from "@nestjs/swagger";
 import { Movie } from "../entities/movie.entity";
 
 import { MovieCastDto } from './movie-cast.dto';
@@ -10,20 +11,56 @@ import { MovieDirectorDto } from './movie-director.dto';
 // import { MovieGenre } from "../entities/movie-genre.entity";
 
 export class MovieDetailDto {
+
+  @ApiProperty({nullable: true})
   id: number;
+  
+  @ApiProperty()
   title: string;
+  
+  @ApiProperty()
   slug: string;
+  
+  @ApiProperty()
   description: string;
+  
+  @ApiProperty()
   releaseDate: Date;
+  
+  
+  @ApiProperty()
   runningTime: number;
+  
+  
+  @ApiProperty()
   ageRating: string;
+  
+  
+  @ApiProperty()
   country: string;
+  
+  
+  @ApiProperty()
   language: string;
+  
+  
+  @ApiProperty()
   thumbnailUrl: string;
 
+  
+  @ApiProperty()
   genres: string[];
+  
+  
+  @ApiProperty()
   casts: MovieCastDto[];
+  
+  
+  @ApiProperty()
   directors: MovieDirectorDto[];
+  
+  
+  @ApiProperty()
   keywords: string[];
 
   static fromEntity(movie: Movie): MovieDetailDto {
