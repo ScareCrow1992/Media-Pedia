@@ -30,7 +30,6 @@ export class ReviewsController {
         @Body('movie_id', ParseMoviePipe) movie: Movie,
         @Body('user_id', ParseUserPipe) user: User,
         @Body() dto: CreateReviewDto): Promise<CreateReviewDto> {
-        // console.log(dto);
         this.reviewsService.createReview(dto);
         return dto;
     }

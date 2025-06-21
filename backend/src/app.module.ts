@@ -1,4 +1,5 @@
 import { Module } from '@nestjs/common';
+import { ConfigModule } from '@nestjs/config';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { TypeOrmModule } from '@nestjs/typeorm';
@@ -18,6 +19,9 @@ import { PipesModule } from './common/pipes/pipes.module';
       database: 'watcha_clone_db',
       entities: [__dirname + '/**/*.entity{.ts,.js}'],
       synchronize: true, // 개발 중엔 true, 운영에선 false!
+    }),
+    ConfigModule.forRoot({
+      isGlobal: true
     }),
     AdminModule,
     QueryModule,

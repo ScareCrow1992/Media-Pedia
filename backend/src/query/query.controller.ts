@@ -12,7 +12,6 @@ export class QueryController {
     async getCastsJoinMovie(
         @Param('id', ParseIntPipe) id: number
     ) {
-        // console.log("query is ok");
         return this.queryService.getMovieCasts(id);
     }
     

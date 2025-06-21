@@ -1,4 +1,4 @@
-export interface UserDTO{
+export interface UserCredential{
     id: number;
   email: string;
 //   password: string;
@@ -7,10 +7,6 @@ export interface UserDTO{
   bio?: string;
   provider?: string;
   socialId?: string;
+  access_token: string;
 }
 
-export interface UserProfileDTO{
-  id: number;
-  email: string;
-  nickname: string;
-}

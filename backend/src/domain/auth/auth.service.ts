@@ -7,15 +7,32 @@ import { LoginDto } from './dto/login.dto';
 import { LoginResponseDto } from './dto/login-response.dto';
 import { InjectRepository } from '@nestjs/typeorm';
 import * as bcrypt from 'bcrypt';
+import { JwtService } from '@nestjs/jwt';
 
 @Injectable()
 export class AuthService {
   constructor(
+    private usersService: UsersService,
+    private jwtService: JwtService,
+
     @InjectRepository(User)
     private readonly userRepository: Repository<User>,
 
     private readonly dataSource: DataSource,
   ) { }
+
+
+  async validateUser(email: string, password: string) {
+    const user = await this.usersService.findByEmail(email);
+    if (user && await bcrypt.compare(password, user.password)) {
+      const { password, ...result } = user;
+      return result;
+    }
+    return null;
+
+
+  }
+
 
   async login(loginDto: LoginDto): Promise<LoginResponseDto> {
     // email로 유저 찾기
@@ -29,10 +46,13 @@ export class AuthService {
       throw new UnauthorizedException('로그인 실패');
     }
     else {
+      const payload = { sub: user.id, email: user.email };
+      const token = this.jwtService.sign(payload);
       return {
         id: user.id,
         email: user.email,
-        nickname: user.nickname
+        nickname: user.nickname,
+        access_token: token
       } satisfies LoginResponseDto;
     }
   }

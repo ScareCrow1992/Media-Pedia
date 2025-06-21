@@ -19,6 +19,19 @@ export class UsersService {
     return this.usersRepo.save(user);         // DB에 INSERT
   }
 
+  async findByEmail(email): Promise<User> {
+    const user = await this.usersRepo.findOne({ where: { email } });
+    if (!user) throw new NotFoundException('해당 유저가 존재하지 않습니다.');
+    return user;
+
+  }
+
+  async findById(id): Promise<User> {
+    const user = await this.usersRepo.findOne({ where: { id } });
+    if (!user) throw new NotFoundException('해당 유저가 존재하지 않습니다.');
+    return user;
+  }
+
   async findAll(): Promise<UserDto[]> {
     const rawUsers = this.usersRepo
       .createQueryBuilder('users')

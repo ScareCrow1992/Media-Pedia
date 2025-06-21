@@ -7,10 +7,10 @@ import LoginModal from "../Modal/modals/LoginMordal";
 import { useUserInfo } from "src/contexts/UserInfoContext";
 import LoginButton from "../LoginButton";
 import SignupButton from "../SignupButton";
+import LooutButton from "./LogoutButton";
 
 export default function Navbar() {
   const { user } = useUserInfo();
-
 
   // const location = useLocation();
 
@@ -40,6 +40,7 @@ export default function Navbar() {
                   <Link to={`/user/${user.id}`} className="bg-gray-200 px-3 py-1 rounded hover:bg-gray-300">
                     프로필
                   </Link>
+                  <LooutButton/>
                 </>
               ) :
               (

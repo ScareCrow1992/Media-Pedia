@@ -1,12 +1,12 @@
 import DropdownMenu from "src/components/common/Dropdown/DropdownMenu";
 import DropdownElement from "src/components/common/Dropdown/DropdownElement";
-import { UserDTO } from "@/apis/user/types";
+import { UserCredential } from "@/apis/user/types";
 
 
 interface Props {
     // children: React.ReactNode;
-    users: UserDTO[];
-    onSelectUser: (user: UserDTO) => void;
+    users: UserCredential[];
+    onSelectUser: (user: UserCredential) => void;
 }
 
 

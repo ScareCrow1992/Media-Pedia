@@ -2,12 +2,15 @@ import { IsEmail, IsNotEmpty, isString, MinLength } from "class-validator";
 
 
 export class LoginResponseDto {
-    id: number;
+  id: number;
 
-    @IsNotEmpty()
-    nickname: string;
+  @IsNotEmpty()
+  nickname: string;
 
-    @IsEmail()
-    email: string;
+  @IsEmail()
+  email: string;
 
+  access_token: string;
+  expires_in?: number;
+  token_type?: 'Bearer';
 }

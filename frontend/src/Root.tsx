@@ -1,7 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 import { Outlet } from "react-router-dom";
 import Navbar from "src/components/common/Navbar";
-import { UserDTO } from "./apis/user/types";
+import { UserCredential } from "./apis/user/types";
 import { fetchTesterLogin } from "./apis/user";
 import UserChanger from "./components/DBG/UserChanger";
 import { useState } from "react";
@@ -13,12 +13,12 @@ export default function Root() {
     data: users,
     isLoading,
     isError,
-  } = useQuery<UserDTO[]>({
+  } = useQuery<UserCredential[]>({
     queryKey: ['tester-login'],
     queryFn: () => fetchTesterLogin(),
   });
 
-  const [user, setUser] = useState<UserDTO | null>(null);
+  const [user, setUser] = useState<UserCredential | null>(null);
   // console.log(setUser)
   // console.log(user);
   // console.log(env);

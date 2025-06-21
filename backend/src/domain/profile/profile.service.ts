@@ -24,7 +24,6 @@ export class ProfileService {
 
       const review_cnt = await this.reviewRepo.count({where: { user_id : id}});
       
-      // console.log(review_cnt)
 
       return ProfileDTO.fromRaw(
         existingUser.id,

@@ -29,7 +29,6 @@ export default function UserProfilePage() {
   // user가 null이 아니면서, user.id와 id가 일치한다면, 프로필 수정 버튼을 활성화한다.
   const isSelfProfile: Boolean = user?.id === Number(id);
 
-  console.log(profile);
   const profile_id = profile.id;
   const profile_email = profile.email;
   const profile_nickname = profile.nickname;
