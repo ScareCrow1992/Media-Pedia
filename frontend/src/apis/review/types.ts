@@ -22,3 +22,12 @@ export interface ReviewDTO {
     movie_id: number;
     nickname: string;
 }
+
+
+export interface ToggleReviewLikeResponseDto {
+  success: boolean;
+  liked: boolean;
+  likeCount: number;
+  reviewId: number;
+  message?: string;
+}

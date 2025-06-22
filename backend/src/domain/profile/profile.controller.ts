@@ -4,6 +4,7 @@ import { ProfileService } from './profile.service';
 import { JwtAuthGuard } from '../auth/jwt-auth.guard';
 import { ApiBearerAuth, ApiHeader, ApiOperation, ApiResponse } from '@nestjs/swagger';
 import { ParseUserPipe } from 'src/common/pipes/parse-user.pipe';
+import { UserInfo } from 'src/common/decorators/user.decorator';
 
 @Controller('profile')
 export class ProfileController {
@@ -21,8 +22,10 @@ export class ProfileController {
   @ApiResponse({ status: 404, description: '해당 id의 유저가 없습니다.' })
   @ApiResponse({ status: 500, description: '서버 내부 오류' })
   async findUserProfile(
+    @UserInfo() user_info,
     @Param('id', ParseIntPipe) user_id: number
   ): Promise<ProfileDTO> {
+    
     return this.profileService.findUserProfile(user_id);
   }
 }

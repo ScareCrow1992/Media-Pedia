@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Param, ParseIntPipe, Post, Query } from '@nestjs/common';
+import { Body, Controller, Get, Param, ParseIntPipe, Post, Query, UseGuards } from '@nestjs/common';
 import { ReviewsService } from './reviews.service';
 import { CreateReviewDto } from './dto/create-review.dto';
 import { ParseMoviePipe } from 'src/common/pipes/parse-movie.pipe';
@@ -7,6 +7,9 @@ import { Movie } from '../movies/entities/movie.entity';
 import { User } from '../users/entities/user.entity';
 import { ReviewDto } from './dto/review.dto';
 import { ApiBody, ApiParam, ApiQuery, ApiResponse, ApiTags } from '@nestjs/swagger';
+import { JwtAuthGuard } from '../auth/jwt-auth.guard';
+import { ToggleReviewLikeResponseDto } from './dto/toggle-revie-like-response.dto';
+import { UserInfo } from 'src/common/decorators/user.decorator';
 
 @Controller('reviews')
 export class ReviewsController {
@@ -43,4 +46,18 @@ export class ReviewsController {
   }
   // @Get("all")
   // async getAllReviews():Promise<ReviewDto[]>{}
+
+
+  @Post(':id/like')
+  @UseGuards(JwtAuthGuard)
+  @ApiTags('Review')
+  async toggleLike(
+    @UserInfo() user_info,
+    @Param('id') review_id: number
+  )/*: Promise<ToggleReviewLikeResponseDto>*/{
+
+    return this.reviewsService.toggleLike(user_info.id, review_id);
+
+  }
+
 }

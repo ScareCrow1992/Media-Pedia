@@ -19,8 +19,6 @@ export default function ReviewModal({ isOpen, onClose, onSubmit }: ReviewModalPr
     <ModalPortal>
       <div className="fixed inset-0 z-50 bg-black bg-opacity-50 flex items-center justify-center">
         <div className="bg-white w-full max-w-md rounded-xl shadow-lg p-8 relative">
-
-
           <div className="fixed inset-0 bg-black/50 z-50 flex items-center justify-center">
             <div className="bg-white rounded-lg shadow-lg p-6 w-[90%] max-w-md">
               <h2 className="text-xl font-bold mb-4">리뷰 작성</h2>

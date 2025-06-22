@@ -12,7 +12,7 @@ export class QueryController {
     @Get("movie/:id/casts")
     async getCastsJoinMovie(
         @Param('id', ParseIntPipe) id: number
-    ) : Promise<CastDto[]>  {
+    ) /*: Promise<CastDto[]> */ {
         return this.queryService.getMovieCasts(id);
     }
     

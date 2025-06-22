@@ -22,6 +22,7 @@ export class JwtStrategy extends PassportStrategy(Strategy) {
     if (!user) {
       throw new UnauthorizedException('User not found');
     }
-    return user; // req.user에 추가된다.
+    // console.log(userID);
+    return user; // req.userID에 추가된다.
   }
 }
