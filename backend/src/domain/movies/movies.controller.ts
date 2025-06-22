@@ -4,7 +4,7 @@ import { Movie } from './entities/movie.entity';
 import { MovieDetailDto } from './dto/movie-detail.dto';
 import { CastDto } from './dto/cast.dto';
 import { QueryService } from 'src/query/query.service';
-import { ApiOperation, ApiResponse } from '@nestjs/swagger';
+import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
 
 @Controller('movies')
 export class MoviesController {
@@ -19,6 +19,7 @@ export class MoviesController {
     // }
     
 
+    @ApiTags('영화')
     @ApiOperation({ summary: '영화 상세 정보' })
     @ApiResponse({status: 200, description: '영화 상세정보', type: MovieDetailDto})
     @Get(':id')

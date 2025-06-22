@@ -19,8 +19,7 @@ export class ReviewsService {
     ) { }
 
 
-    async getPreviewReviewsForMovie(movieId: Number, limit: Number): Promise<ReviewDto[]> {
-
+    async getPreviewReviewsForMovie(movieId: number, limit: number): Promise<ReviewDto[]> {
 
         /* select
         reviews.id as "id",
@@ -63,7 +62,7 @@ export class ReviewsService {
             ])
             .where('reviews.movie_id = :movieId', { movieId })
             .orderBy('reviews.rating', 'DESC')
-            .limit(8)
+            .limit(limit)
             .getRawMany();
 
         const result: ReviewDto[] = rawReviews.map(ReviewDto.fromRaw);
