@@ -7,6 +7,7 @@ import { DirectorModule } from './director/director.module';
 import { ReportsModule } from './reports/reports.module';
 import { AuthModule } from './auth/auth.module';
 import { ProfileModule } from './profile/profile.module';
+import { ReviewCommentModule } from './review-comment/review-comment.module';
 
 @Module({
   imports: [
@@ -18,6 +19,7 @@ import { ProfileModule } from './profile/profile.module';
     ReportsModule,
     AuthModule,
     ProfileModule,
+    ReviewCommentModule
   ],
   exports: [
     MoviesModule,
@@ -27,6 +29,7 @@ import { ProfileModule } from './profile/profile.module';
     DirectorModule,
     ReportsModule,
     AuthModule,
+    ReviewCommentModule
   ],
 })
 export class DomainModule { }

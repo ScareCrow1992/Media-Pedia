@@ -1,7 +1,7 @@
 export class ToggleReviewLikeResponseDto {
   success: boolean;
   liked: boolean;
-  likeCount: number;
+  like_count: number;
   reviewId: number;
   message?: string;
 
@@ -9,7 +9,7 @@ export class ToggleReviewLikeResponseDto {
     const ret: ToggleReviewLikeResponseDto = {
       success: success,
       liked: liked,
-      likeCount: likeCount,
+      like_count: likeCount,
       reviewId: review_id,
       message: message
     };

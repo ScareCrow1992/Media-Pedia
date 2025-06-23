@@ -3,8 +3,9 @@ import {
   ManyToOne, CreateDateColumn, Unique, JoinColumn
 } from 'typeorm';
 import { User } from 'src/domain/users/entities/user.entity';
-import { Comment } from 'src/domain/reviews/entities/comment.entity';
+// import { Comment } from 'src/domain/reviews/entities/comment.entity';
 import { ReportType } from './review-report.entity';
+import { ReviewComment } from 'src/domain/review-comment/entities/review-comment.entity';
 
 @Entity('review_comment_reports')
 @Unique(['user', 'comment'])
@@ -16,9 +17,9 @@ export class ReviewCommentReport {
   @JoinColumn({ name: 'user_id' })
   user: User;
 
-  @ManyToOne(() => Comment, { onDelete: 'CASCADE' })
+  @ManyToOne(() => ReviewComment, { onDelete: 'CASCADE' })
   @JoinColumn({ name: 'comment_id' })
-  comment: Comment;
+  comment: ReviewComment;
 
   @Column({ type: 'enum', enum: ReportType, name: 'report_type' })
   reportType: ReportType;

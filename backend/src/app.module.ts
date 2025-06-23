@@ -37,7 +37,7 @@ import { APP_GUARD } from '@nestjs/core';
     AdminModule,
     QueryModule,
     DomainModule,
-    PipesModule
+    PipesModule,
   ],
   controllers: [AppController],
   providers: [

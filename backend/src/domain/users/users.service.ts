@@ -1,5 +1,5 @@
 // src/users/users.service.ts
-import { Injectable, NotFoundException } from '@nestjs/common';
+import { BadRequestException, Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { User } from './entities/user.entity';
@@ -26,9 +26,14 @@ export class UsersService {
 
   }
 
-  async findById(id): Promise<User> {
+  async findById(id:number): Promise<User> {
+
+    if (typeof id !== 'number' || !Number.isInteger(id)) {
+      throw new BadRequestException('잘못된 ID입니다.');
+    }
     const user = await this.usersRepo.findOne({ where: { id } });
     if (!user) throw new NotFoundException('해당 유저가 존재하지 않습니다.');
+
     return user;
   }
 

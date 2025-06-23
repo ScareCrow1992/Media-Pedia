@@ -22,7 +22,7 @@ export class ReviewsService {
   ) { }
 
 
-  async getPreviewReviewsForMovie(movieId: number, limit: number): Promise<ReviewDto[]> {
+  async getPreviewReviewsForMovie(movieId: number, limit: number, user_info: User | null): Promise<ReviewDto[]> {
 
     /* select
     reviews.id as "id",
@@ -34,7 +34,8 @@ export class ReviewsService {
     left Join users on reviews.user_id = users.id
     where reviews.movie_id = 1; */
 
-    let user_id = "2"
+    let user_id = user_info ? user_info.id : 0;
+    // user_id = 5;
 
     const rawReviews = await this.reviewRepo
       .createQueryBuilder('reviews')
@@ -54,28 +55,75 @@ export class ReviewsService {
         'like_summary',
         'like_summary.review_id = reviews.id'
       )
+      .leftJoin(
+        qb => qb
+          .select('review_comments.review_id', 'review_id')
+          .addSelect('COUNT(*)', 'comment_count')
+          .from('review_comments', 'review_comments')
+          .groupBy('review_comments.review_id'),
+        'comment_summary',
+        'comment_summary.review_id = reviews.id'
+      )
       .select([
         'reviews.id AS id',
         'reviews.content AS content',
         'reviews.rating AS rating',
         'users.nickname AS nickname',
         'reviews.movie_id AS movie_id',
+        'rl.id AS rl_id',
         'CASE WHEN rl.id IS NOT NULL THEN true ELSE false END AS is_liked',
         'COALESCE(like_summary.like_count, 0) AS likes_count',
+        'COALESCE(comment_summary.comment_count, 0) AS comments_count',
       ])
       .where('reviews.movie_id = :movieId', { movieId })
       .orderBy('reviews.rating', 'DESC')
       .limit(limit)
       .getRawMany();
 
-    const result: ReviewDto[] = rawReviews.map(ReviewDto.fromRaw);
-    return result;
-    // await this.reviewRepository.find({
-    //     where: { movie: { id: movieId } }, // movie는 relation 기준
-    //     order: { rating: 'DESC' },
-    //     take: 8,
-    // });
 
+    const result: ReviewDto[] = rawReviews.map(ReviewDto.fromRaw);
+
+
+    /*
+        const rawReviews_ = await this.reviewRepo
+          .createQueryBuilder('reviews')
+          .leftJoin('reviews.user', 'users')
+          .leftJoin(
+            'review_likes',
+            'rl',
+            'rl.review_id = reviews.id AND rl.user_id = :user_id',
+            { user_id }
+          )
+          .leftJoin(
+            qb => qb
+              .select('review_likes.review_id', 'review_id')
+              .addSelect('COUNT(*)', 'like_count')
+              .from('review_likes', 'review_likes')
+              .groupBy('review_likes.review_id'),
+            'like_summary',
+            'like_summary.review_id = reviews.id'
+          )
+          .select([
+            'reviews.id AS id',
+            'reviews.content AS content',
+            'reviews.rating AS rating',
+            'users.nickname AS nickname',
+            'reviews.movie_id AS movie_id',
+            'rl.id AS rl_id', // ✅ 반드시 추가
+            'CASE WHEN rl.id IS NOT NULL THEN true ELSE false END AS is_liked',
+            'COALESCE(like_summary.like_count, 0) AS likes_count',
+          ])
+          .where('reviews.movie_id = :movieId', { movieId })
+          .orderBy('reviews.rating', 'DESC')
+          .limit(limit)
+          .getRawMany();
+    
+          // .getSql();
+    
+        console.log(rawReviews_);
+        */
+
+    return result;
   }
 
 
@@ -86,10 +134,10 @@ export class ReviewsService {
   }
 
 
-  // 점검필요
-  async toggleLike(userId: number, reviewId: number) : Promise<ToggleReviewLikeResponseDto> {
+  async toggleLike(userId: number, reviewId: number): Promise<ToggleReviewLikeResponseDto> {
 
-    let ret_existing : boolean = false;
+    let ret_existing: boolean = false;
+    let ret_like_count: number = 0;
 
     await this.dataSource.transaction(async (manager) => {
       const existing = await manager.getRepository(ReviewLike)
@@ -105,7 +153,19 @@ export class ReviewsService {
         await manager.getRepository(ReviewLike).insert({ user_id: userId, review_id: reviewId });
         ret_existing = true;
       }
+
+      ret_like_count = await manager.getRepository(ReviewLike)
+        .createQueryBuilder('rl')
+        .where('rl.review_id = :reviewId', { reviewId })
+        .getCount();
     });
+
+
+    let like_count = ret_like_count;
+    return ToggleReviewLikeResponseDto.fromRaw(
+      true, ret_existing, like_count, reviewId, ""
+    );
+
 
     // console.log(userId, reviewId);
     /*
@@ -124,11 +184,5 @@ export class ReviewsService {
       $$;
     `);
     */
-
-    let like_count = 5;
-    return ToggleReviewLikeResponseDto.fromRaw(
-      true, ret_existing, like_count, reviewId, ""
-    );
-
   }
 }

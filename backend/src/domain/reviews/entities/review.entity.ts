@@ -16,10 +16,10 @@ import { ReviewLike } from './review-like.entity';
 import { ReviewReport } from './review-report.entity';
 
 @Entity('reviews')
-@Index('idx_movie_id', ['movie'])
-@Index('idx_user_id', ['user'])
-@Index('idx_engagement_score', ['engagementScore'])
-@Index('idx_likes_count', ['likesCount'])
+@Index('idx_reviews_likes_movie_id', ['movie'])
+@Index('idx_reviews_likes_user_id', ['user'])
+@Index('idx_reviews_likes_engagement_score', ['engagementScore'])
+@Index('idx_reviews_likes_count', ['likesCount'])
 export class Review {
   @PrimaryGeneratedColumn()
   id: number;
@@ -33,10 +33,11 @@ export class Review {
   movie: Movie;
 
 
+//  @Column({ type: 'int', default: 0 , insert: false, update: false  })
   @Column({ type: 'int', default: 0 })
   user_id: number;
 
-
+//  @Column({ type: 'int', default: 0 , insert: false, update: false  })
   @Column({ type: 'int', default: 0 })
   movie_id: number;
 
