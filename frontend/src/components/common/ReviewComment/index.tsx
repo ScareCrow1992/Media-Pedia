@@ -2,6 +2,9 @@ import { fetchToggleReviewCommentLike } from "src/apis/review";
 import { ReviewCommentDto, ToggleReviewCommentLikeResponseDto } from "src/apis/review/types";
 import { useState } from "react";
 import LikeToggleButton from "../LikeToggleButton";
+import { Ellipsis } from "lucide-react";
+import DropdownMenu from "../EllipsisMenu";
+import EllipsisMenu from "../EllipsisMenu";
 
 
 interface ReviewCommentProp {
@@ -58,10 +61,17 @@ export default function ReviewComment({ reviewCommentDto }: ReviewCommentProp) {
         <span className="text-xs text-gray-400">10년 전</span>
       </div>
       <p className="text-sm text-gray-800">{comment.content}</p>
-      <div className="mt-1 text-sm text-gray-500 flex items-center gap-1">
+      <div className="flex mt-1 text-sm text-gray-500 flex items-center gap-1">
         <span className="text-lg">
           <LikeToggleButton isLiked={isLiked} onToggle={handleToggle} />
         </span> 좋아요 {99}
+
+        <EllipsisMenu className = "ml-auto">
+          <span className="text-lg p-2">댓글 수정</span>
+          <span className="text-lg p-2">댓글 삭제</span>
+        </EllipsisMenu>
+
+        {/* <Ellipsis className="ml-auto" /> */}
       </div>
     </div>
   );

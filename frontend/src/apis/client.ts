@@ -1,5 +1,5 @@
 import { isTokenExpired } from 'src/util/jwt';
-import { getCookie } from 'src/util/coocie';
+import { getCookie } from 'src/util/cookie';
 import axios from 'axios';
 import { logout } from 'src/contexts/logout';
 

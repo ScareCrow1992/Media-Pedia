@@ -61,3 +61,10 @@ export interface ToggleReviewCommentLikeResponseDto{
   comment_id: number;
   message?: string;
 }
+
+
+export interface EditReviewDto {
+  review_id: number;
+  rating: number;
+  content: string;
+}

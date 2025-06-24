@@ -1,22 +1,19 @@
+interface ReviewCardHeaderProps {
+  nickname: string;
+  rating: number;
+}
 
-
-
-export default function ReviewCardHeader() {
-    return (
-        <div className="h-[4rem] bg-green-200">
-            <div className="flex h-full mr-[1rem]">
-                <div className=" m-[0.85rem] rounded-full aspect-square bg-red-300">
-                    <div className="">
-                    </div>
-                </div>
-                <div className="flex items-center h-full grow">
-                    <span>이동진 평론가</span>
-                </div>
-                <div className="flex items-center h-full">
-                    <span>★</span>
-                    <span>4.0</span>
-                </div>
-            </div>
-        </div>
-    );
+export default function ReviewCardHeader({nickname, rating} : ReviewCardHeaderProps) {
+  return (
+    <div className="flex items-center justify-between px-4 h-16 bg-gray-100">
+      <div className="flex items-center gap-3">
+        <div className="w-10 h-10 rounded-full bg-gray-300" />
+        <span className="text-sm font-medium">{nickname}</span>
+      </div>
+      <div className="flex items-center gap-1 text-sm">
+        <span className="text-yellow-400">★</span>
+        <span className="font-semibold">{rating / 2}</span>
+      </div>
+    </div>
+  );
 }

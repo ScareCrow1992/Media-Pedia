@@ -1,110 +1,70 @@
-import { CreateReviewCommentDto, ReviewDTO, ToggleReviewLikeResponseDto } from "src/apis/review/types";
-import LikeToggleButton from "../common/LikeToggleButton";
-import { fetchPostComment, fetchToggleReviewLike } from "src/apis/review";
-import { useState } from "react";
-import CommentButton from "../common/Comment";
-import CommentModal from "../common/Modal/modals/CommentModal";
+import { CreateReviewCommentDto, EditReviewDto, ReviewDTO } from "src/apis/review/types";
+import { fetchDeleteReview, fetchEditReview, fetchPostComment } from "src/apis/review";
 import CommentModalV2 from "../common/Modal/modals/CommentModalV2";
-
+import ReviewCardHeader from "./ReviewCardHeader";
+import ReviewCardDesc from "./ReviewCardDesc";
+import ReviewCardFooter from "./ReviewCardFooter";
+import { useReviewLike } from "src/hooks/useReviewLike";
+import { useModal } from "src/hooks/useModal";
+import ContentEditModal from "../common/Modal/modals/ContentEditModal";
+import { useUserInfo } from "src/contexts/UserInfoContext";
+import ConfirmModal from "../common/Modal/modals/ConfirmModal";
 
 interface Prop {
   review: ReviewDTO
 }
 
 export default function ReviewCard({ review }: Prop) {
-  // console.log(review.likes_count);
 
-  const [isModalOpen, setIsModalOpen] = useState(false);
-  const onCommentClicked = () => {
-    setIsModalOpen(current_state => !current_state);
-  }
+  const { user } = useUserInfo();
 
-  // ReviewCard가 "좋아요" 버튼의 상태를 직접 관리한다.
-  // 상태 변경시 최대한 동일 배치내에 렌더링이 재수행 되도록 코드 설계 할 것
-  const [isLiked, setIsLiked] = useState(review.is_liked);
-  const [likeCnt, setLikeCnt] = useState(review.likes_count)
+  const { isLiked, likeCnt, toggle } = useReviewLike(review.id, review.is_liked, review.likes_count);
 
-  // 낙관적 업데이트(Ooptimistic UI)
-  const handleToggle = async () => {
-    const prev = isLiked;
+  const {
+    isOpen: comment_isOpen,
+    toggle: comment_toggleModal,
+    close: comment_closeModal } = useModal();
 
-    setIsLiked(!prev); // 1️⃣ 즉시 UI 반영
-
-    if (!prev) {
-      setLikeCnt(currentLikeCount => currentLikeCount + 1)
-    }
-    else {
-      setLikeCnt(currentLikeCount => currentLikeCount - 1)
-    }
-
-    try {
-      const result: ToggleReviewLikeResponseDto = await fetchToggleReviewLike(review.id);
-
-      // 2️⃣ 서버 결과와 실제 불일치하면 반영 (정합성 맞추기)
-      if (result.liked !== !prev) {
-        setIsLiked(result.liked);
-      }
-      if (result.like_count !== likeCnt)
-        setLikeCnt(result.like_count);
+  const {
+    isOpen: edit_isOpen,
+    toggle: edit_toggleModal,
+    close: edit_closeModal } = useModal();
 
 
-    } catch (e) {
-      // 3️⃣ 에러 발생 시 롤백
-      setIsLiked(prev);
-      console.error("좋아요 토글 실패", e);
-    }
-  };
+  const {
+    isOpen: delete_isOpen,
+    toggle: delete_toggleModal,
+    close: delete_closeModal } = useModal();
+
+
 
   return (
     <div className="flex flex-col w-full h-full rounded-lg overflow-hidden bg-white shadow">
       {/* 헤더 영역 */}
-      <div className="flex items-center justify-between px-4 h-16 bg-gray-100">
-        <div className="flex items-center gap-3">
-          <div className="w-10 h-10 rounded-full bg-gray-300" />
-          <span className="text-sm font-medium">{review.nickname}</span>
-        </div>
-        <div className="flex items-center gap-1 text-sm">
-          <span className="text-yellow-400">★</span>
-          <span className="font-semibold">{review.rating / 2}</span>
-        </div>
-      </div>
+      <ReviewCardHeader nickname={review.nickname} rating={review.rating} />
 
       {/* 내용 */}
-      <div className="px-4 py-3 text-sm leading-relaxed grow line-clamp-3">
-        {review.content}
-      </div>
+      <ReviewCardDesc content={review.content} className="px-4 py-3 text-sm leading-relaxed grow line-clamp-3" />
 
       {/* 하단 기능 바 */}
-      <div className="flex flex-col bg-gray-50 border-t">
-        <div className="flex items-center h-10 px-4 text-xs gap-4 text-gray-600">
-          <div>
-            좋아요 <span className="ml-1">{likeCnt}</span>
-          </div>
-          <div>
-            댓글 <span className="ml-1">{review.comments_count}</span>
-          </div>
-        </div>
+      <ReviewCardFooter
+        likeCnt={likeCnt}
+        comments_count={review.comments_count}
+        isLiked={isLiked}
+        onLikeToggle={toggle}
+        onCommentClick={comment_toggleModal}
+        onEditClick={edit_toggleModal}
+        onTryDelete={delete_toggleModal}
+        className="flex flex-col bg-gray-50 border-t"
+      />
 
-        {/* 첨부 이미지 썸네일 */}
-        <div className="flex items-center gap-2 px-4 py-2">
-          <div className="w-12 h-12">
-            <LikeToggleButton isLiked={isLiked} onToggle={handleToggle} />
-          </div>
-          <div className="w-12 h-12">
-            <CommentButton onClicked={onCommentClicked} />
-          </div>
-          <div className="w-12 h-12 bg-gray-300 rounded" />
-          <div className="w-12 h-12 bg-gray-300 rounded ml-auto" />
-        </div>
-      </div>
       {/* 코멘트 모달 */}
-
       {
-        isModalOpen && (
+        comment_isOpen && (
           <CommentModalV2
             review_id={review.id}
-            isOpen={isModalOpen}
-            onClose={() => setIsModalOpen(false)}
+            isOpen={comment_isOpen}
+            onClose={comment_closeModal}
             onSubmit={(text) => {
 
               const comment_data: CreateReviewCommentDto = {
@@ -112,41 +72,45 @@ export default function ReviewCard({ review }: Prop) {
               }
 
               fetchPostComment(review.id, comment_data);
-              setIsModalOpen(false);
+              comment_closeModal();
             }}
           />
-
         )
       }
 
+      {edit_isOpen && (
+        <ContentEditModal
+          isOpen={edit_isOpen}
+          onClose={edit_closeModal}
+          onSubmit={(text) => {
+            // 수정 로직
+            if (user) {
+              const editReviewDto: EditReviewDto = {
+                review_id: review.id,
+                rating: review.rating,
+                content: text
+              };
+              fetchEditReview(review.id, editReviewDto);
+            }
 
-      {/* <CommentModal
-        isOpen={isModalOpen}
-        onClose={() => setIsModalOpen(false)}
-        onSubmit={(text) => {
+            edit_closeModal();
+          }}
+        />
+      )}
 
-          const comment_data : CreateReviewCommentDto = {
-            content: text,
-          }
+      {delete_isOpen && (
+        <ConfirmModal
+          message="리뷰를 삭제하시겠어요?"
+          isOpen={delete_isOpen}
+          onConfirm={()=>{
+            //fetch
+            fetchDeleteReview(review.id);
+            delete_closeModal();
+          }}
+          onCancel={delete_closeModal}
+        />
+      )}
 
-          fetchPostComment(review.id, comment_data);
-
-
-          // if (user) {
-          //   let createReviewDTO: CreateReviewDTO = {
-          //     rating: rating * 2,
-          //     content: text,
-          //     movie_id: toInt(movie.id),
-          //     user_id: user.id
-          //   };
-
-          //   fetchCreateReview(createReviewDTO);
-          // }
-
-          // 
-          setIsModalOpen(false);
-        }}
-      /> */}
     </div>
   );
 }

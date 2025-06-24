@@ -51,7 +51,7 @@ export default function CommentModalV2({
 
   return (
     <div className="fixed inset-0 z-50 bg-black bg-opacity-50 flex items-center justify-center">
-      <div className="bg-white w-[640px] max-h-[90vh] rounded-2xl relative flex flex-col overflow-hidden">
+      <div className="bg-white w-[640px] max-h-[75vh] rounded-2xl relative flex flex-col overflow-hidden">
 
         {/* 상단 헤더 */}
         <div className="flex justify-between items-center px-6 py-4 border-b">
@@ -78,7 +78,7 @@ export default function CommentModalV2({
             <input
               value={content}
               onChange={(e) => setContent(e.target.value)}
-              placeholder="코멘트에 댓글을 남겨보세요"
+              placeholder="리뷰에 댓글을 남겨보세요"
               className="flex-1 px-4 py-2 rounded-full border border-gray-300 text-sm focus:outline-none"
             />
             <button

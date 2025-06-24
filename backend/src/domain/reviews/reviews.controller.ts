@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Param, ParseIntPipe, Post, Query, UseGuards } from '@nestjs/common';
+import { BadRequestException, Body, Controller, Delete, Get, Param, ParseIntPipe, Patch, Post, Query, UseGuards } from '@nestjs/common';
 import { ReviewsService } from './reviews.service';
 import { CreateReviewDto } from './dto/create-review.dto';
 import { ParseMoviePipe } from 'src/common/pipes/parse-movie.pipe';
@@ -13,6 +13,7 @@ import { UserInfo } from 'src/common/decorators/user.decorator';
 import { OptionalJwtAuthGuard } from '../auth/guards/optional-jwt.guard';
 import { ReviewCommentService } from '../review-comment/review-comment.service';
 import { CreateReviewCommentDto } from '../review-comment/dto/create-review-comment.dto';
+import { EditReviewDto } from './dto/edit-review.dto';
 
 @Controller('reviews')
 export class ReviewsController {
@@ -33,7 +34,7 @@ export class ReviewsController {
     @Param('movie_id') movie_id: number,
     @Query('limit') limit: number = 8): Promise<ReviewDto[]> {
 
-    return this.reviewsService.getPreviewReviewsForMovie(movie_id, limit, user_info);
+    return await this.reviewsService.getPreviewReviewsForMovie(movie_id, limit, user_info);
   }
 
 
@@ -49,6 +50,35 @@ export class ReviewsController {
     this.reviewsService.createReview(dto);
     return dto;
   }
+
+
+  @Patch(':review_id')
+  @UseGuards(JwtAuthGuard)
+  async editReview(
+    @UserInfo() user,
+    @Param('review_id', ParseIntPipe) review_id: number,
+    @Body() dto: EditReviewDto) {
+
+    if (!dto || typeof dto !== 'object' || !dto.content) {
+      // 400
+      throw new BadRequestException('요청 본문이 없습니다.');
+    }
+
+    return await this.reviewsService.editReview(user, review_id, dto);
+  }
+
+
+  @Delete(':review_id')
+  @UseGuards(JwtAuthGuard)
+  async deleteReview(
+    @UserInfo() user,
+    @Param('review_id', ParseIntPipe) review_id: number) {
+
+
+    return await this.reviewsService.deleteReview(user, review_id);
+  }
+
+
   // @Get("all")
   // async getAllReviews():Promise<ReviewDto[]>{}
 
@@ -61,7 +91,7 @@ export class ReviewsController {
     @Param('id') review_id: number
   )/*: Promise<ToggleReviewLikeResponseDto>*/ {
 
-    return this.reviewsService.toggleLike(user_info.id, review_id);
+    return await this.reviewsService.toggleLike(user_info.id, review_id);
   }
 
 
@@ -82,6 +112,6 @@ export class ReviewsController {
     @Param('review_id') review_id: number,
     @Query('limit_cnt') limit_cnt: number) {
 
-      return await this.reviewCommentService.getComments(review_id, limit_cnt);
+    return await this.reviewCommentService.getComments(review_id, limit_cnt);
   }
 }

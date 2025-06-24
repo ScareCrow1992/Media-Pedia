@@ -1,4 +1,4 @@
-import { Body, Injectable, Move } from '@nestjs/common';
+import { BadRequestException, Body, ForbiddenException, Injectable, Move, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Review } from './entities/review.entity';
 import { DataSource, Repository } from 'typeorm';
@@ -8,6 +8,8 @@ import { User } from '../users/entities/user.entity';
 import { Movie } from '../movies/entities/movie.entity';
 import { ReviewLike } from './entities/review-like.entity';
 import { ToggleReviewLikeResponseDto } from './dto/toggle-revie-like-response.dto';
+import { EditReviewDto } from './dto/edit-review.dto';
+import { UserInfo } from 'os';
 
 @Injectable()
 export class ReviewsService {
@@ -131,6 +133,77 @@ export class ReviewsService {
     const review = this.reviewRepo.create(dto);
     return await this.reviewRepo.save(review);
 
+  }
+
+
+  async editReview(
+    user: User,
+    review_id: number,
+    dto: EditReviewDto) {
+
+    // console.log(user);
+    // console.log(review_id);
+    // console.log(typeof review_id === 'number');
+    // console.log(Number.isInteger(review_id));
+    
+
+
+    if (typeof review_id !== 'number' || !Number.isInteger(review_id)) {
+      // 400
+      throw new BadRequestException('잘못된 Review_ID입니다.');
+    }
+
+    const review = await this.reviewRepo.findOne({ where: { id: review_id } });
+    if(!review){
+      // 404
+      throw new NotFoundException('존재하지 않는 리뷰입니다.');
+    }
+
+    if(user.id !== review.user_id){
+      // 403
+      throw new ForbiddenException('본인의 리뷰만 수정할 수 있습니다.');
+    }
+
+    await this.reviewRepo.update({id: review_id}, {content : dto.content})
+
+    return "PONG";
+  }
+
+
+  async deleteReview(
+    user: User,
+    review_id: number) {
+
+    if (typeof review_id !== 'number' || !Number.isInteger(review_id)) {
+      // 400
+      throw new BadRequestException('잘못된 Review_ID입니다.');
+    }
+
+    const review = await this.reviewRepo.findOne({ where: { id: review_id } });
+    if (!review) {
+      // 404
+      throw new NotFoundException('존재하지 않는 리뷰입니다.');
+    }
+
+    if (user.id !== review.user_id) {
+      // 403
+      throw new ForbiddenException('본인의 리뷰만 수정할 수 있습니다.');
+    }
+
+    // await this.reviewRepo.update({id: review_id}, {deletedAt: new Date() } )
+    await this.reviewRepo.softDelete({id: review_id});
+
+    return "PONG";
+  }
+
+
+  async restoreReview() {
+    /*
+      await this.reviewRepo.update(
+        { id: review_id },
+        { deletedAt: null }
+      );
+    */
   }
 
 
