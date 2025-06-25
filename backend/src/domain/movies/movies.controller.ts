@@ -17,6 +17,15 @@ export class MoviesController {
     // async getMovieCasts(@Param('id', ParseIntPipe) id: number): Promise<[CastDto]>{
     //     return this.queryService.getMovieCasts(id);
     // }
+
+
+    @Get('latest/:limit_cnt')
+    async getLatestMovies(
+      @Param('limit_cnt', ParseIntPipe) limit_cnt : number
+    ): Promise<MovieDetailDto[]>{
+
+      return this.moviesService.getLatestMovies(limit_cnt);
+    }
     
 
     @ApiTags('영화')

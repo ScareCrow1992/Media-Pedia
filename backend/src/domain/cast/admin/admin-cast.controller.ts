@@ -1,7 +1,8 @@
-import { Body, Controller, Get, Post } from '@nestjs/common';
+import { Body, Controller, Get, Param, ParseIntPipe, Patch, Post } from '@nestjs/common';
 import { AdminCastService } from './admin-cast.service';
 import { CreateCastDto } from './dto/create-cast.dto';
 import { Cast } from 'src/domain/movies/entities/cast.entity';
+import { UpdateMovieDto } from 'src/domain/movies/admin/dto/update-movie.dto';
 
 @Controller('admin/cast')
 export class AdminCastController {
@@ -17,4 +18,12 @@ export class AdminCastController {
         return "Hello!";
     }
 
+    @Patch(":cast_id")
+    async patchCast(
+        @Param("cast_id", ParseIntPipe) cast_id : number,
+        @Body() dto: CreateCastDto
+
+    ){
+      return this.adminCastsService.updateCast(cast_id, dto);
+    }
 }

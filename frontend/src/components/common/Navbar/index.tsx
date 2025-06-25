@@ -12,17 +12,24 @@ import LooutButton from "./LogoutButton";
 export default function Navbar() {
   const { user } = useUserInfo();
 
-  // const location = useLocation();
+  const location = useLocation();
 
-  // const isTransparentNav =
-  //     matchPath("/movies/:id", location.pathname) ||
-  //     matchPath("/drama/:id", location.pathname);
-  const isTransparentNav = false;
+  // const is_relative = matchPath("/admin", location.pathname);
+  const is_relative = false;
 
+  // console.log(is_relative);
+
+  const isTransparentNav =
+      matchPath("/movies/:id", location.pathname) ||
+      matchPath("/drama/:id", location.pathname);
+  // const isTransparentNav = false;
+  // console.log(isTransparentNav);
   return (
     <>
       <nav className={
-        `sticky top-0 z-30 flex items-center justify-between p-4
+        `z-30 flex items-center justify-between p-4
+            ${is_relative ? "relative" : "fixed w-full top-0"}
+
             ${isTransparentNav ? "" : "border-b border-zinc-400"}
             ${isTransparentNav ? "bg-transparent text-white" : "bg-white text-black"}
         `}>
@@ -51,7 +58,6 @@ export default function Navbar() {
               )
           }
         </div>
-
       </nav>
     </>
   );

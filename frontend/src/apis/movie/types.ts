@@ -12,7 +12,7 @@ export interface MovieDetailDTO {
     title: string;
     slug: string;
     description: string;
-    releaseDate: string;
+    releaseDate: Date;
     runningTime: number;
     ageRating: string;
     country: string;

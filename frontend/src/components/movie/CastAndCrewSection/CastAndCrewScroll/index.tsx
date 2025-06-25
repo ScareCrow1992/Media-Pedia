@@ -19,7 +19,7 @@ export default function CastAndCrewScroll({ casts }: Props) {
             {grouped.map((group, index) => (
                 <div key={index} className="flex flex-col shrink-0 w-1/4">
                     {group.map((cast) => (
-                        <CastAndCrewCard key={cast.id} cast={cast} />
+                        <CastAndCrewCard key={cast.id} id={cast.id} cast={cast} linkUrl="/cast" />
                     ))}
                 </div>
             ))}

@@ -1,4 +1,4 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
+import { BadRequestException, Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { Movie } from './entities/movie.entity';
@@ -11,6 +11,28 @@ export class MoviesService {
     private readonly movieRepository: Repository<Movie>,
   ) { }
 
+
+  async getLatestMovies(limit_cnt: number): Promise<MovieDetailDto[]> {
+
+    if(typeof limit_cnt !== 'number' || !Number.isInteger(limit_cnt)){
+      throw new BadRequestException('잘못된 ID입니다.');
+    }
+
+    if(limit_cnt > 20)
+      limit_cnt = 20;
+
+    const raw_datas = await this.movieRepository.find({
+      order: {releaseDate: 'ASC'},
+      take: limit_cnt
+    });
+
+    // console.log(movie_datas);
+
+    const result: MovieDetailDto[] = raw_datas.map(MovieDetailDto.fromEntity);
+    return result;
+  }
+
+  
   async findById(id: number): Promise<MovieDetailDto> {
     const movie_entity = await this.movieRepository.findOne({ where: { id } });
 

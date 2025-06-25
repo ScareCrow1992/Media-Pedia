@@ -1,7 +1,7 @@
 // src/movies/admin/dto/create-movie.dto.ts
 import { IsString, IsOptional, IsInt, IsDateString } from 'class-validator';
 
-export class CreateMovieDto {
+export class UpdateMovieDto {
   @IsString()
   title: string;
 
@@ -18,7 +18,7 @@ export class CreateMovieDto {
 
   @IsOptional()
   @IsInt()
-  running_time?: number;
+  runningTime?: number;
 
   @IsOptional()
   @IsString()

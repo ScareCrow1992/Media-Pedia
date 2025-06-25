@@ -9,6 +9,7 @@ import { UserInfoContext, UserInfoProvider } from "./contexts/UserInfoContext";
 
 export default function Root() {
 
+  /*
   const {
     data: users,
     isLoading,
@@ -17,6 +18,7 @@ export default function Root() {
     queryKey: ['tester-login'],
     queryFn: () => fetchTesterLogin(),
   });
+  */
 
   const [user, setUser] = useState<UserCredential | null>(null);
   // console.log(setUser)
@@ -30,11 +32,11 @@ export default function Root() {
     <UserInfoProvider>
       <div className="min-h-screen text-black">
         <Navbar />
-        {
+        {/* {
           <>
             {users && (<UserChanger users={users} onSelectUser={setUser} />)}
           </>
-        }
+        } */}
         <main>
           <Outlet />
         </main>
