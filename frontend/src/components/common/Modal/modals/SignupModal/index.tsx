@@ -30,7 +30,6 @@ export default function SignupModal({ onClose }: { onClose: () => void }) {
       setEmailError(null);
 
       const ret = await fetchUserRegister(userRegisterDTO);
-      console.log(ret);
     }
     catch (error: any) {
       if (error.response) {

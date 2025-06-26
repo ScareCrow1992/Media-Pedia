@@ -6,7 +6,6 @@ import { fetchGetProfile } from "src/apis/profile";
 
 export default function UserProfilePage() {
 
-
   const { id } = useParams();
   const { user } = useUserInfo();
 
@@ -25,6 +24,8 @@ export default function UserProfilePage() {
   if (isError || !profile) {
     return <div className="text-red-500 text-center mt-10">프로필 정보를 불러올 수 없습니다.</div>;
   }
+
+  
 
   // user가 null이 아니면서, user.id와 id가 일치한다면, 프로필 수정 버튼을 활성화한다.
   const isSelfProfile: Boolean = user?.id === Number(id);

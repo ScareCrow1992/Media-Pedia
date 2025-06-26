@@ -1,4 +1,4 @@
-import { fetchGetReviewCommends } from "src/apis/review";
+import { fetchGetReviewComments } from "src/apis/review";
 import { ReviewCommentDto } from "src/apis/review/types";
 import { useQuery } from "@tanstack/react-query";
 import { useState } from "react";
@@ -35,19 +35,11 @@ export default function CommentModalV2({
     isError,
   } = useQuery<ReviewCommentDto[]>({
     queryKey: ['review_comment', review_id],
-    queryFn: () => fetchGetReviewCommends(review_id, 10)
+    queryFn: () => fetchGetReviewComments(review_id, 10)
   });
 
 
   if (!isOpen) return null;
-
-  if (isLoading) {
-    return <div className="text-white text-center mt-10">로딩 중...</div>;
-  }
-  if (isError || !comments) {
-    return <div className="text-red-500 text-center mt-10">리뷰 정보를 불러올 수 없습니다.</div>;
-  }
-
 
   return (
     <div className="fixed inset-0 z-50 bg-black bg-opacity-50 flex items-center justify-center">
@@ -61,9 +53,19 @@ export default function CommentModalV2({
 
         {/* 댓글 리스트 (스크롤 영역) */}
         <div className="flex-1 overflow-y-auto px-6 py-4 space-y-6">
-          {comments.map(comment => (
-            <ReviewComment key= {comment.comment_id} reviewCommentDto = {comment} />
-          ))}
+
+          {isLoading ? (
+            <div className="text-center text-gray-500 mt-10">불러오는 중...</div>
+          ) : isError || !comments ? (
+            <div className="text-center text-red-500 mt-10">댓글을 불러올 수 없습니다.</div>
+          ) : comments.length === 0 ? (
+            <div className="text-center text-gray-400 mt-10">아직 댓글이 없습니다.</div>
+          ) : (
+            comments.map(comment => (
+              <ReviewComment key={comment.comment_id} reviewCommentDto={comment} />
+            ))
+          )}
+
         </div>
 
         {/* 하단 고정 입력창 */}

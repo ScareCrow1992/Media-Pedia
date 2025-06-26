@@ -1,10 +1,11 @@
-import { Controller, Param, Post, UseGuards } from "@nestjs/common";
+import { Body, Controller, Get, Param, Post, Query, UseGuards } from "@nestjs/common";
 import { ReviewCommentService } from "./review-comment.service";
 import { JwtAuthGuard } from "../auth/guards/jwt-auth.guard";
 import { ApiTags } from "@nestjs/swagger";
 import { UserInfo } from "src/common/decorators/user.decorator";
+import { CreateReviewCommentDto } from "./dto/create-review-comment.dto";
 
-@Controller("comments")
+@Controller("reviews/:review_id/comment")
 export class ReviewCommentController {
 
   constructor(
@@ -12,20 +13,24 @@ export class ReviewCommentController {
   ) { }
 
 
-
-
-
-  @Post(':comment_id/like')
+  @Post('')
   @UseGuards(JwtAuthGuard)
-  @ApiTags("Comment")
-  async toggleLike(
+  async postReviewComment(
     @UserInfo() user_info,
-    @Param("comment_id") comment_id: number) {
+    @Param('review_id') review_id: number,
+    @Body() dto: CreateReviewCommentDto
+  ): Promise<void> {
 
-    // console.log("user_info", user_info);
-    // console.log("comment_id", comment_id);
+    await this.reviewCommentService.postComment(review_id, user_info, dto);
+  }
 
-    return this.reviewCommentService.toggleCommentLike(user_info.id, comment_id);
+
+  @Get('')
+  async getReviewCommets(
+    @Param('review_id') review_id: number,
+    @Query('limit_cnt') limit_cnt: number) {
+
+    return await this.reviewCommentService.getComments(review_id, limit_cnt);
   }
 
 

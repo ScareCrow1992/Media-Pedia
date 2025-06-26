@@ -5,3 +5,4 @@ export const fetchGetProfile = async (user_id: string): Promise<ProfileDTO> => {
   const res = await apiStrictAuthclient.get(`/profile/${user_id}`)
   return res.data;
 }
+

@@ -4,7 +4,7 @@ import MovieForm from "../components/Movieform";
 import { useQuery } from "@tanstack/react-query";
 import { MovieDetailDTO } from "src/apis/movie/types";
 import { fetchMovieById } from "src/apis/movie";
-import { adminPostMovie, adminUpdateMovie } from "src/apis/admin";
+import { adminUpdateMovie } from "src/apis/admin";
 import { CreateUpdateMovieDto, toUpdateMovieDto, UpdateMovieDto } from "src/apis/admin/type";
 
 
@@ -32,11 +32,10 @@ export default function MovieEditPage() {
     return <div>잘못된 영화 id 입니다.</div>
   }
 
-
   const onSubmit = async (partial_dto: CreateUpdateMovieDto) => {
     try {
       const dto: UpdateMovieDto = toUpdateMovieDto(partial_dto);
-      console.log(dto)
+      // console.log(dto)
       adminUpdateMovie(movie_id, dto);
     }
     catch (e: any) {
@@ -44,9 +43,7 @@ export default function MovieEditPage() {
     }
   }
 
-
   return (
     <MovieForm movieDto={movie} onSubmitProp={onSubmit} />
   )
-
 }

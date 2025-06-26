@@ -33,7 +33,6 @@ export default function LoginModal({ onClose }: { onClose: () => void }) {
 
             const ret = await fetchLogin(loginDTO);
             setUser(ret)
-            console.log(ret);
         }
         catch (error: any) {
             if (error.response) {

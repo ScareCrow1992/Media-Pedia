@@ -34,11 +34,11 @@ export default function MovieReviewsSection() {
   const padding = "p-[0.25rem]"
   return (
     <>
-      <div className="grid grid-cols-4 grid-rows-2 bg-gray-200">
+      <div className="grid grid-cols-4 grid-rows-2">
         {
           reviews?.map(review => (
             <div key={review.id} className={`h-[21rem] ${padding}`}>
-              <ReviewCard review={review} />
+              <ReviewCard review_card_url={`/review_detail/${review.id}`} review={review} />
             </div>
           ))
         }

@@ -4,7 +4,7 @@ import { ToggleReviewLikeResponseDto } from "src/apis/review/types";
 
 export function useReviewLike(reviewId: number, initialIsLiked: boolean, initialLikeCount: number) {
   const [isLiked, setIsLiked] = useState(initialIsLiked);
-  const [likeCnt, setLikeCnt] = useState(initialLikeCount);
+  const [likeCnt, setLikeCnt] = useState<number>(initialLikeCount);
 
   const toggle = async () => {
     const prev = isLiked;

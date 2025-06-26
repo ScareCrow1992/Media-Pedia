@@ -9,12 +9,14 @@ import { useModal } from "src/hooks/useModal";
 import ContentEditModal from "../common/Modal/modals/ContentEditModal";
 import { useUserInfo } from "src/contexts/UserInfoContext";
 import ConfirmModal from "../common/Modal/modals/ConfirmModal";
+import ReviewLikedUsersModal from "../common/Modal/modals/ReviewLikedUsersModal";
 
 interface Prop {
-  review: ReviewDTO
+  review_card_url: string | null;
+  review: ReviewDTO;
 }
 
-export default function ReviewCard({ review }: Prop) {
+export default function ReviewCard({ review_card_url, review }: Prop) {
 
   const { user } = useUserInfo();
 
@@ -30,21 +32,23 @@ export default function ReviewCard({ review }: Prop) {
     toggle: edit_toggleModal,
     close: edit_closeModal } = useModal();
 
-
   const {
     isOpen: delete_isOpen,
     toggle: delete_toggleModal,
     close: delete_closeModal } = useModal();
 
-
+  const {
+    isOpen: likes_isOpen,
+    toggle: likes_toggleModal,
+    close: likes_closeModal } = useModal();
 
   return (
-    <div className="flex flex-col w-full h-full rounded-lg overflow-hidden bg-white shadow">
+    <div className="flex flex-col w-full h-full rounded-lg overflow-hidden bg-white shadow-[0_0_12px_rgba(0,0,0,0.3)]">
       {/* 헤더 영역 */}
       <ReviewCardHeader nickname={review.nickname} rating={review.rating} />
 
       {/* 내용 */}
-      <ReviewCardDesc content={review.content} className="px-4 py-3 text-sm leading-relaxed grow line-clamp-3" />
+      <ReviewCardDesc url={review_card_url} content={review.content} className="px-4 py-3 text-sm leading-relaxed grow line-clamp-3 tracking-tight font-NatoSansKR" />
 
       {/* 하단 기능 바 */}
       <ReviewCardFooter
@@ -55,6 +59,7 @@ export default function ReviewCard({ review }: Prop) {
         onCommentClick={comment_toggleModal}
         onEditClick={edit_toggleModal}
         onTryDelete={delete_toggleModal}
+        onLikesCntClick={likes_toggleModal}
         className="flex flex-col bg-gray-50 border-t"
       />
 
@@ -108,6 +113,14 @@ export default function ReviewCard({ review }: Prop) {
             delete_closeModal();
           }}
           onCancel={delete_closeModal}
+        />
+      )}
+
+      {likes_isOpen && (
+        <ReviewLikedUsersModal
+          isOpen={likes_isOpen}
+          onClose={likes_closeModal}
+          review_id={review.id}
         />
       )}
 

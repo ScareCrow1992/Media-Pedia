@@ -32,7 +32,7 @@ export default function ReviewsPage() {
                     {
                         reviews?.map(review => (
                             <div key={review.id} className="h-[17rem] p-[0.25rem]">
-                                <ReviewCard review={review} />
+                                <ReviewCard review_card_url = {`/review_detail/${review.id}`} review={review} />
                             </div>
                         ))
                     }

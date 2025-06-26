@@ -31,14 +31,14 @@ export class ReviewDto {
 
 
     return {
-      id: raw.id,
-      rating: raw.rating,
+      id: Number(raw.id),
+      rating: Number(raw.rating),
       content: raw.content,
-      movie_id: raw.movie_id,
+      movie_id: Number(raw.movie_id),
       nickname: raw.nickname,
       is_liked: raw.is_liked,
-      likes_count: raw.likes_count,
-      comments_count: raw.comments_count
+      likes_count: Number(raw.likes_count),
+      comments_count: Number(raw.comments_count)
     };
   }
 }

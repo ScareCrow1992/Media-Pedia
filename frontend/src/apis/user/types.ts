@@ -1,7 +1,7 @@
-export interface UserCredential{
-    id: number;
+export interface UserCredential {
+  id: number;
   email: string;
-//   password: string;
+  //   password: string;
   nickname: string;
   profileImageUrl?: string;
   bio?: string;
@@ -10,3 +10,20 @@ export interface UserCredential{
   access_token: string;
 }
 
+
+
+export interface UserDto {
+  id: number;
+
+  email: string;
+
+  nickname: string;
+
+  profileImageUrl?: string;
+
+  bio?: string;
+
+  provider?: string;
+
+  socialId?: string;
+}

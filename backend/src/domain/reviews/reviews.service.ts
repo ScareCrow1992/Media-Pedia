@@ -5,11 +5,10 @@ import { DataSource, Repository } from 'typeorm';
 import { CreateReviewDto } from './dto/create-review.dto';
 import { ReviewDto } from './dto/review.dto';
 import { User } from '../users/entities/user.entity';
-import { Movie } from '../movies/entities/movie.entity';
 import { ReviewLike } from './entities/review-like.entity';
 import { ToggleReviewLikeResponseDto } from './dto/toggle-revie-like-response.dto';
 import { EditReviewDto } from './dto/edit-review.dto';
-import { UserInfo } from 'os';
+import { UserDto } from '../users/dto/user.dto';
 
 @Injectable()
 export class ReviewsService {
@@ -37,7 +36,6 @@ export class ReviewsService {
     where reviews.movie_id = 1; */
 
     let user_id = user_info ? user_info.id : 0;
-    // user_id = 5;
 
     const rawReviews = await this.reviewRepo
       .createQueryBuilder('reviews')
@@ -128,6 +126,71 @@ export class ReviewsService {
     return result;
   }
 
+  async getReview(review_id: number, user_info: User | null): Promise<ReviewDto> {
+
+    let user_id = user_info ? user_info.id : 0;
+
+    if (typeof review_id !== 'number' || !Number.isInteger(review_id)) {
+      // 400
+      throw new BadRequestException('잘못된 Review_ID입니다.');
+    }
+
+    // const review_raw = await this.reviewRepo.findOne({ where: { id: review_id } });
+    // if (!review_raw) {
+    //   // 404
+    //   throw new NotFoundException('존재하지 않는 리뷰입니다.');
+    // }
+
+
+    const review_raw = await this.reviewRepo
+      .createQueryBuilder('reviews')
+      .leftJoin('reviews.user', 'users')
+      .leftJoin(
+        'review_likes',
+        'rl',
+        'rl.user_id = :user_id',
+        { user_id }
+      )
+      .leftJoin(
+        qb => qb
+          .select('review_likes.review_id', 'review_id')
+          .addSelect('COUNT(*)', 'like_count')
+          .from('review_likes', 'review_likes')
+          .groupBy('review_likes.review_id'),
+        'like_summary',
+        'like_summary.review_id = reviews.id'
+      )
+      .leftJoin(
+        qb => qb
+          .select('review_comments.review_id', 'review_id')
+          .addSelect('COUNT(*)', 'comment_count')
+          .from('review_comments', 'review_comments')
+          .groupBy('review_comments.review_id'),
+        'comment_summary',
+        'comment_summary.review_id = reviews.id'
+      )
+      .select([
+        'reviews.id AS id',
+        'reviews.content AS content',
+        'reviews.rating AS rating',
+        'users.nickname AS nickname',
+        'rl.id AS rl_id',
+        'CASE WHEN rl.id IS NOT NULL THEN true ELSE false END AS is_liked',
+        'COALESCE(like_summary.like_count, 0) AS likes_count',
+        'COALESCE(comment_summary.comment_count, 0) AS comments_count',
+      ])
+      .where('reviews.id = :reviewId', { reviewId: review_id })
+      .getRawOne();
+
+    if (!review_raw) {
+      // 404
+      throw new NotFoundException('존재하지 않는 리뷰입니다.');
+    }
+
+
+    return ReviewDto.fromRaw(review_raw)
+  }
+
 
   async createReview(@Body() dto: CreateReviewDto): Promise<Review> {
     const review = this.reviewRepo.create(dto);
@@ -145,7 +208,7 @@ export class ReviewsService {
     // console.log(review_id);
     // console.log(typeof review_id === 'number');
     // console.log(Number.isInteger(review_id));
-    
+
 
 
     if (typeof review_id !== 'number' || !Number.isInteger(review_id)) {
@@ -154,17 +217,23 @@ export class ReviewsService {
     }
 
     const review = await this.reviewRepo.findOne({ where: { id: review_id } });
-    if(!review){
+    if (!review) {
       // 404
       throw new NotFoundException('존재하지 않는 리뷰입니다.');
     }
 
-    if(user.id !== review.user_id){
+    if (user.id !== review.user_id) {
       // 403
       throw new ForbiddenException('본인의 리뷰만 수정할 수 있습니다.');
     }
 
-    await this.reviewRepo.update({id: review_id}, {content : dto.content})
+    await this.reviewRepo.update({ id: review_id }, { content: dto.content })
+
+
+
+    await new Promise(resolve => {
+      setTimeout(resolve, 1000);
+    });
 
     return "PONG";
   }
@@ -191,7 +260,7 @@ export class ReviewsService {
     }
 
     // await this.reviewRepo.update({id: review_id}, {deletedAt: new Date() } )
-    await this.reviewRepo.softDelete({id: review_id});
+    await this.reviewRepo.softDelete({ id: review_id });
 
     return "PONG";
   }
@@ -234,6 +303,10 @@ export class ReviewsService {
     });
 
 
+    await new Promise(resolve => {
+      setTimeout(resolve, 1000);
+    });
+
     let like_count = ret_like_count;
     return ToggleReviewLikeResponseDto.fromRaw(
       true, ret_existing, like_count, reviewId, ""
@@ -258,4 +331,23 @@ export class ReviewsService {
     `);
     */
   }
+
+
+  async getLikedUsersByReviewId(reviewId: number): Promise<UserDto[]> {
+    const rawUsers = await this.review_likeRepo.query(
+      `
+      SELECT u.id, u.email, u.nickname, u.profile_image_url
+      FROM review_likes rl
+      INNER JOIN users u ON rl.user_id = u.id
+      WHERE rl.review_id = $1
+      `,
+      [reviewId]
+    );
+
+    this.review_likeRepo.query
+    // console.log(rawUsers);
+
+    return rawUsers.map(UserDto.fromRaw);
+  }
+
 }

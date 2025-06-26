@@ -3,7 +3,7 @@ import CommentButton from "src/components/common/Comment";
 import EditButton from "src/components/common/EditButton";
 import LikeToggleButton from "src/components/common/LikeToggleButton";
 
-interface ReviewCardFooter {
+interface ReviewCardFooterProps {
   likeCnt: number;
   comments_count: number;
   isLiked: boolean;
@@ -12,6 +12,7 @@ interface ReviewCardFooter {
   className: string;
   onEditClick: () => void;
   onTryDelete: () => void;
+  onLikesCntClick: () => void;
 }
 
 
@@ -23,29 +24,32 @@ export default function ReviewCardFooter({
   onCommentClick,
   className,
   onEditClick,
-  onTryDelete
-}: ReviewCardFooter) {
+  onTryDelete,
+  onLikesCntClick
+}: ReviewCardFooterProps) {
+
+
   return (
     <div className={className}>
-      <div className="flex items-center h-10 px-4 text-xs gap-4 text-gray-600">
+      <div className="flex items-center h-10 px-4 text-xs gap-4 text-gray-600 font-medium tracking-tight font-NatoSansKR">
         <div>
-          좋아요 <span className="ml-1">{likeCnt}</span>
+          <button onClick={onLikesCntClick}>좋아요  {likeCnt}</button>
         </div>
         <div>
-          댓글 <span className="ml-1">{comments_count}</span>
+          <span>댓글  {comments_count}</span>
         </div>
       </div>
 
       {/* 첨부 이미지 썸네일 */}
-      <div className="flex items-center gap-2 px-4 py-2">
-        <div className="w-8 h-8">
+      <div className="flex items-center gap-2 px-4 pb-5 tracking-tight font-NatoSansKR">
+        <div className="w-6 h-6">
           <LikeToggleButton isLiked={isLiked} onToggle={onLikeToggle} />
         </div>
-        <div className="w-8 h-8">
+        <div className="w-6 h-6">
           <CommentButton onClicked={onCommentClick} />
         </div>
-        <EditButton onClick={onEditClick} className="w-8 h-8 rounded ml-auto" />
-        <DeleteButton onClick={onTryDelete} className="w-8 h-8 rounded" />
+        <EditButton onClick={onEditClick} className="w-6 h-6 ml-auto" />
+        <DeleteButton onClick={onTryDelete} className="w-6 h-6" />
 
       </div>
     </div>

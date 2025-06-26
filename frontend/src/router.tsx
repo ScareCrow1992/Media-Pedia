@@ -7,20 +7,24 @@ import UserProfilePage from "./pages/UserProfilePage";
 import AdminPage from "./pages/AdminPage";
 import { adminRoutes } from "./routes/adminRoutes";
 
-export const router = createBrowserRouter([
-    {
-        path: "/",
-        element: <Root />,
-        children: [
-            { index: true, element: <HomePage /> }, // 기본 자식
-            { path: "movies/:id", element: <MovieDetailPage /> },
-            { path: "reviews/:id", element: <ReviewsPage/>},
-            { path: "user/:id", element: <UserProfilePage/>},
-            { path: "cast/:id", element: <UserProfilePage/>},
+/* NotFound pages */
+import NotFoundPage from "./pages/NotFoundPage";
+import NotFoundRootPage from "./pages/NotFoundRootPage";
+import ReviewDetailPage from "./pages/ReviewDetailPage";
 
-            // { path: "admin", element: <AdminPage/>}
-            adminRoutes()
-            // TODO: signup, login, mypage 등 추가 예정
-        ],
-    },
+export const router = createBrowserRouter([
+  {
+    path: "/",
+    element: <Root />,
+    children: [
+      { index: true, element: <HomePage />, errorElement: <NotFoundPage /> }, // 기본 자식
+      { path: "movies/:id", element: <MovieDetailPage />, errorElement: <NotFoundPage /> },
+      { path: "reviews/:id", element: <ReviewsPage />, errorElement: <NotFoundPage /> },
+      { path: "user/:id", element: <UserProfilePage />, errorElement: <NotFoundPage /> },
+      { path: "cast/:id", element: <UserProfilePage />, errorElement: <NotFoundPage /> },
+      { path: "review_detail/:review_id", element: <ReviewDetailPage />, errorElement: <NotFoundPage /> },
+      ...adminRoutes()
+    ],
+    errorElement: <NotFoundRootPage />
+  },
 ]);

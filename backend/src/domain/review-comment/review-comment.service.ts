@@ -58,6 +58,11 @@ export class ReviewCommentService {
       .limit(limitCnt)
       .getRawMany();
 
+
+    await new Promise(resolve => {
+      setTimeout(resolve, 1000);
+    });
+
     return ReviewCommentDto.fromRawArray(raw_datas);
   }
 

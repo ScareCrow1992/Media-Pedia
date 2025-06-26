@@ -24,8 +24,6 @@ export default function MovieDetailPage() {
     enabled: !!id,
   });
 
-
-
   if (isLoading) {
     return <div className="text-white text-center mt-10">로딩 중...</div>;
   }
@@ -33,35 +31,32 @@ export default function MovieDetailPage() {
     return <div className="text-red-500 text-center mt-10">영화 정보를 불러올 수 없습니다.</div>;
   }
 
-
-
-
-  // console.log(movie.directors)
-  // console.log(movie);
-  // console.log(movie.title);
-  // console.log(movie.description)
-  // console.log(movie.)
-  // console.log(JSON.stringify(movie));
-
-  const sectionMarginX = [0,1,2,3,6];
-//className="absolute top-0 left-0 w-full"
+  const sectionMarginX = [0, 1, 2, 3, 6];
+  //className="absolute top-0 left-0 w-full"
   return (
     <div>
       <div>
 
         <MovieContext.Provider value={{ movie }}>
-          
-          <MovieHeaderSection/>
+
+          <MovieHeaderSection />
           <PageSection marginX={sectionMarginX}>
-            <MovieInfoSection/>
+            <MovieInfoSection />
           </PageSection>
 
-          <PageSection title="출연/제작" marginX={sectionMarginX}>
-            <CastAndCrewSection/>
+          <PageSection
+            title="출연/제작"
+            marginX={sectionMarginX}
+            marginY="my-20">
+            <CastAndCrewSection />
           </PageSection>
 
-          <PageSection title="코멘트" marginX={sectionMarginX} link={`/reviews/${id}`}>
-            <MovieReviewsSection/>
+          <PageSection
+            title="코멘트"
+            marginX={sectionMarginX}
+            link={`/reviews/${id}`}
+            marginY="my-20">
+            <MovieReviewsSection />
           </PageSection>
 
         </MovieContext.Provider>
@@ -82,7 +77,7 @@ export default function MovieDetailPage() {
       </div> */}
 
 
-
+{/* 
         <div>
           <div className="mx-[4rem] my-[2rem] ">
             <h1 className="text-2xl font-bold mb-4">갤러리</h1>
@@ -109,7 +104,7 @@ export default function MovieDetailPage() {
             <p>선택된 영화 ID: <span className="text-pink-400 font-mono">{id}</span></p>
 
           </div>
-        </div>
+        </div> */}
       </div>
     </div>
   );
