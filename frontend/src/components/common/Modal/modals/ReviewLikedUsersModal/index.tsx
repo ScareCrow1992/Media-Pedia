@@ -1,6 +1,6 @@
-import { getLikedUsersByReviewId } from "src/apis/review";
+import { getLikedUsersByReviewId } from "src/apis/services/review";
 import { useQuery } from "@tanstack/react-query";
-import { UserDto } from "src/apis/user/types";
+import { UserDto } from "src/apis/services/user/types";
 import UserListItem from "src/components/common/UserListItem";
 
 
@@ -45,7 +45,7 @@ export default function ReviewLikedUsersModal(
             ) : isError || !user_dtos ? (
               <div className="text-center text-red-500 mt-10">댓글을 불러올 수 없습니다.</div>
             ) : user_dtos.length === 0 ? (
-              <div className="text-center text-gray-400 mt-10">아직 댓글이 없습니다.</div>
+              <div className="text-center text-gray-400 mt-10">아직 좋아요한 사람이 없습니다.</div>
             ) : (
               user_dtos.map(user_dto => (
                 <li className="h-[5.5rem]" key={user_dto.id}>

@@ -1,7 +1,8 @@
-import { isTokenExpired } from 'src/util/jwt';
-import { getCookie } from 'src/util/cookie';
 import axios from 'axios';
-import { logout } from 'src/contexts/logout';
+
+import { logout } from "src/contexts/logout";
+import { getCookie } from "src/util/cookie";
+import { isTokenExpired } from "src/util/jwt";
 
 
 // 인가 불필요 요청
@@ -47,7 +48,7 @@ apiOptionalAuthclient.interceptors.request.use(
 
 
 
-// 인가 필요 요청 인터셉터 추가
+// 인가 필수 요청 인터셉터 추가
 apiStrictAuthclient.interceptors.request.use(
   (config) => {
     const token = getCookie("user", "access_token"); // 쿠키에서 토큰 읽기

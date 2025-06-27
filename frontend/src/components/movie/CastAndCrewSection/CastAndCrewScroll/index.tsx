@@ -1,6 +1,6 @@
 import HorizontalScroller from "src/components/common/HorizontalScrollerProps";
 import CastAndCrewCard from "../CastAndCrewCard";
-import { CastDTO } from "src/apis/cast/types";
+import { CastDTO } from "src/apis/services/cast/types";
 
 interface Props {
     casts: CastDTO[];

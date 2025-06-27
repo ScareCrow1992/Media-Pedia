@@ -1,6 +1,6 @@
 import DropdownMenu from "src/components/common/Dropdown/DropdownMenu";
 import DropdownElement from "src/components/common/Dropdown/DropdownElement";
-import { UserCredential } from "@/apis/user/types";
+import { UserCredential } from "src/apis/services/user/types";
 
 
 interface Props {

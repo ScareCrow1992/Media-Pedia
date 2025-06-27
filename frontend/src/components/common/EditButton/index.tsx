@@ -1,6 +1,5 @@
 import { useState } from "react";
 import { Pencil } from "lucide-react";
-import { ToggleReviewLikeResponseDto } from "src/apis/review/types";
 
 interface EditButton {
   onClick: () => void;

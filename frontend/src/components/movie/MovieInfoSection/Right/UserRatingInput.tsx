@@ -1,9 +1,9 @@
 import { useState } from "react";
 import RatingSelector from "./RatingSelector";
 import ReviewModal from "src/components/common/Modal/modals/ReviewModal";
-import { fetchCreateReview } from "src/apis/review";
-import { useParams } from "react-router-dom";
-import { CreateReviewDTO } from "src/apis/review/types"
+import { fetchCreateReview } from "src/apis/services/review";
+// import { useParams } from "react-router-dom";
+import { CreateReviewDTO } from "src/apis/services/review/types"
 import { MovieProps } from "src/types/movie";
 import { useUserInfo } from "src/contexts/UserInfoContext";
 

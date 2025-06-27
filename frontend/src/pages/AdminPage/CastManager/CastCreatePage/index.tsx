@@ -1,8 +1,8 @@
-import { CreateCastDto, CreateUpdateMovieDto } from "@/apis/admin/type";
+import { CreateCastDto, CreateUpdateMovieDto } from "src/apis/services/admin/type";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import CastForm from "../components/CastForm";
-import { adminPostCast } from "src/apis/admin";
+import { adminPostCast } from "src/apis/services/admin";
 
 
 

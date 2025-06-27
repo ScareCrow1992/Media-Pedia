@@ -1,14 +1,14 @@
 import { useParams } from "react-router-dom";
 import { useQuery } from '@tanstack/react-query';
-import { fetchMovieById } from "src/apis/movie";
-import { MovieDetailDTO } from "src/apis/movie/types";
+import { fetchMovieById } from "src/apis/services/movie";
+import { MovieDetailDTO } from "src/apis/services/movie/types";
 import { MovieContext } from "src/contexts/MoviePageContext";
 import PageSection from "src/components/common/Layout/PageSection";
 import MovieHeaderSection from "src/components/movie/MovieHeaderSection";
 import MovieInfoSection from "src/components/movie/MovieInfoSection";
 import CastAndCrewSection from "src/components/movie/CastAndCrewSection";
 import MovieReviewsSection from "src/components/movie/MovieReviewsSection";
-// import { fetchMovieById } from "@/apis/movie";
+// import { fetchMovieById } from "src/apis/movie";
 
 
 export default function MovieDetailPage() {

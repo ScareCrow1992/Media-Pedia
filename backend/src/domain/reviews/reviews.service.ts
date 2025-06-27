@@ -303,9 +303,9 @@ export class ReviewsService {
     });
 
 
-    await new Promise(resolve => {
-      setTimeout(resolve, 1000);
-    });
+    // await new Promise(resolve => {
+    //   setTimeout(resolve, 1000);
+    // });
 
     let like_count = ret_like_count;
     return ToggleReviewLikeResponseDto.fromRaw(

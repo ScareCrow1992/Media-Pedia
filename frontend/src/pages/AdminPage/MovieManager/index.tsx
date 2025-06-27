@@ -1,6 +1,6 @@
-import { fetchGetLatestMovies } from "src/apis/movie";
+import { fetchGetLatestMovies } from "src/apis/services/movie";
 import { Link } from "react-router-dom";
-import { MovieDetailDTO } from "src/apis/movie/types";
+import { MovieDetailDTO } from "src/apis/services/movie/types";
 import { useState } from "react";
 import MovieCard from "src/components/common/MovieCard";
 
@@ -11,7 +11,7 @@ export default function MovieManager() {
   const handleRefresh = async () => {
 
     try {
-      const movie_details: MovieDetailDTO[] = await fetchGetLatestMovies(10);
+      const movie_details: MovieDetailDTO[] = await fetchGetLatestMovies(50);
       setMovieList(movie_details);
     }
     catch (error: any) {
@@ -45,11 +45,8 @@ export default function MovieManager() {
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2">
             {movieList.map((movie) => (
               <MovieCard key={movie.id}
-                id={movie.id}
-                title={"Interstellar"}
-                year={2022}
-                posterUrl={"/posters/interstellar.webp"}
-                linkUrl = {"/admin/movies/edit"}
+                dto={movie}
+                linkUrl={"/admin/movies/edit"}
               />
             ))}
           </div>

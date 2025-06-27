@@ -1,11 +1,11 @@
-import { CreateCastDto, CreateUpdateMovieDto } from "@/apis/admin/type";
+import { CreateCastDto, CreateUpdateMovieDto } from "src/apis/services/admin/type";
 import { useForm } from "react-hook-form";
 import { useNavigate, useParams } from "react-router-dom";
 import CastForm from "../components/CastForm";
-import { adminUpdateCast } from "src/apis/admin";
-import { CastDTO } from "src/apis/cast/types";
+import { adminUpdateCast } from "src/apis/services/admin";
+import { CastDTO } from "src/apis/services/cast/types";
 import { useQuery } from "@tanstack/react-query";
-import { fetchGetCast } from "src/apis/cast";
+import { fetchGetCast } from "src/apis/services/cast";
 
 
 

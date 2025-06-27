@@ -1,4 +1,4 @@
-import { UserCredential } from 'src/apis/user/types';
+import { UserCredential } from 'src/apis/services/user/types';
 import { createContext, ReactNode, useContext, useEffect, useState } from 'react';
 import Cookies from 'js-cookie';
 

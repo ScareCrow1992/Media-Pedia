@@ -1,6 +1,5 @@
 import { useState } from "react";
 import { ThumbsUp } from "lucide-react";
-import { ToggleReviewLikeResponseDto } from "src/apis/review/types";
 
 interface LikeToggleButtonProps {
   isLiked: boolean;

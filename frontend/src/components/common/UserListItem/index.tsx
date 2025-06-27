@@ -1,5 +1,5 @@
-import { ProfileDTO } from "@/apis/profile/types"
-import { UserDto } from "@/apis/user/types"
+// import { ProfileDTO } from "src/apis/services/profile/types"
+import { UserDto } from "src/apis/services/user/types"
 
 interface Prop {
   dto: UserDto

@@ -1,8 +1,8 @@
 import { useQuery } from "@tanstack/react-query";
 import { Outlet } from "react-router-dom";
 import Navbar from "src/components/common/Navbar";
-import { UserCredential } from "./apis/user/types";
-import { fetchTesterLogin } from "./apis/user";
+import { UserCredential } from "./apis/services/user/types";
+import { fetchTesterLogin } from "./apis/services/user";
 import UserChanger from "./components/DBG/UserChanger";
 import { useState } from "react";
 import { UserInfoContext, UserInfoProvider } from "./contexts/UserInfoContext";

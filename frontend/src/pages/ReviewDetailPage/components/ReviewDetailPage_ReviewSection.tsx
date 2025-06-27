@@ -1,5 +1,5 @@
-import { fetchGetReview } from "src/apis/review";
-import { ReviewDTO } from "src/apis/review/types";
+import { fetchGetReview } from "src/apis/services/review";
+import { ReviewDTO } from "src/apis/services/review/types";
 import ReviewCard from "src/components/review/ReviewCard";
 import { useQuery } from "@tanstack/react-query";
 

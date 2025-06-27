@@ -1,11 +1,7 @@
-import { MovieDetailDTO } from "src/apis/movie/types";
+// import { MovieDetailDTO } from "src/apis/services/movie/types";
 import MovieInfoLeftPanel from "./Left";
 import MovieInfoRightPanel from "./Right";
 
-
-interface MovieProps {
-    movie: MovieDetailDTO;
-}
 
 export default function MovieInfoSection() {
   return (

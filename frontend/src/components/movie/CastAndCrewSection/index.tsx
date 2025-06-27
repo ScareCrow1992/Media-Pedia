@@ -4,10 +4,10 @@ import SnapScrollItem from "src/components/common/SnapScrollItem";
 import SnapScrollList from "src/components/common/SnapScrollList";
 import CastAndCrewCard from "./CastAndCrewCard";
 import CastAndCrewScroll from "./CastAndCrewScroll";
-import { CastDTO } from "src/apis/cast/types";
+import { CastDTO } from "src/apis/services/cast/types";
 import { useQuery } from "@tanstack/react-query";
 import { useParams } from "react-router-dom";
-import { fetchCastsByMovie } from "src/apis/cast";
+import { fetchCastsByMovie } from "src/apis/services/cast";
 
 
 export default function CastAndCrewSection() {

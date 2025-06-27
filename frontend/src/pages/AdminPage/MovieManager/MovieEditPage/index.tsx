@@ -2,10 +2,10 @@
 import { useParams } from "react-router-dom";
 import MovieForm from "../components/Movieform";
 import { useQuery } from "@tanstack/react-query";
-import { MovieDetailDTO } from "src/apis/movie/types";
-import { fetchMovieById } from "src/apis/movie";
-import { adminUpdateMovie } from "src/apis/admin";
-import { CreateUpdateMovieDto, toUpdateMovieDto, UpdateMovieDto } from "src/apis/admin/type";
+import { MovieDetailDTO } from "src/apis/services/movie/types";
+import { fetchMovieById } from "src/apis/services/movie";
+import { adminUpdateMovie } from "src/apis/services/admin";
+import { CreateUpdateMovieDto, toUpdateMovieDto, UpdateMovieDto } from "src/apis/services/admin/type";
 
 
 export default function MovieEditPage() {

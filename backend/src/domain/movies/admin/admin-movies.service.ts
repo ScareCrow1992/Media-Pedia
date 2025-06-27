@@ -35,7 +35,7 @@ export class AdminMoviesService {
   }
 
   async createMovie(dto: CreateMovieDto): Promise<Movie> {
-    console.log(dto)
+    // console.log(dto)
     const movie = this.movieRepo.create(dto);
     return await this.movieRepo.save(movie);
   }

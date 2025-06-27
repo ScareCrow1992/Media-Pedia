@@ -1,5 +1,5 @@
-import { CreateReviewCommentDto, EditReviewDto, ReviewDTO } from "src/apis/review/types";
-import { fetchDeleteReview, fetchEditReview, fetchPostComment } from "src/apis/review";
+import { CreateReviewCommentDto, EditReviewDto, ReviewDTO } from "src/apis/services/review/types";
+import { fetchDeleteReview, fetchEditReview, fetchPostComment } from "src/apis/services/review";
 import CommentModalV2 from "../common/Modal/modals/CommentModalV2";
 import ReviewCardHeader from "./ReviewCardHeader";
 import ReviewCardDesc from "./ReviewCardDesc";

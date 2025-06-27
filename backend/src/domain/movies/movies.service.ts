@@ -18,8 +18,8 @@ export class MoviesService {
       throw new BadRequestException('잘못된 ID입니다.');
     }
 
-    if(limit_cnt > 20)
-      limit_cnt = 20;
+    if(limit_cnt > 50)
+      limit_cnt = 50;
 
     const raw_datas = await this.movieRepository.find({
       order: {releaseDate: 'ASC'},
@@ -27,6 +27,9 @@ export class MoviesService {
     });
 
     // console.log(movie_datas);
+    await new Promise(resolve => {
+      setTimeout(resolve, 1000);
+    });
 
     const result: MovieDetailDto[] = raw_datas.map(MovieDetailDto.fromEntity);
     return result;

@@ -1,5 +1,5 @@
-import { CreateCastDto } from "src/apis/admin/type";
-import { CastDTO } from "src/apis/cast/types";
+import { CreateCastDto } from "src/apis/services/admin/type";
+import { CastDTO } from "src/apis/services/cast/types";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import { useEffect } from "react";

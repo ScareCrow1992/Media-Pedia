@@ -1,8 +1,8 @@
 import ReviewCard from "src/components/review/ReviewCard";
 import { useParams } from "react-router-dom";
-import { ReviewDTO } from "src/apis/review/types";
+import { ReviewDTO } from "src/apis/services/review/types";
 import { useQuery } from "@tanstack/react-query";
-import { fetchGetPreviewReviewsForMovie } from "src/apis/review";
+import { fetchGetPreviewReviewsForMovie } from "src/apis/services/review";
 
 export default function ReviewsPage() {
 

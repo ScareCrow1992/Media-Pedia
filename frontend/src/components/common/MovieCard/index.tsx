@@ -1,16 +1,18 @@
+import { MovieDetailDTO } from "src/apis/services/movie/types";
 import { Link } from "react-router-dom";
 
 type Props = {
-  id: number;
-  title: string;
-  year: number;
-  posterUrl: string;
+  dto : MovieDetailDTO;
   linkUrl: string;
+  // id: number;
+  // title: string;
+  // year: number;
+  // posterUrl: string;
 };
 
-export default function MovieCard({ id, title, year, posterUrl, linkUrl }: Props) {
+export default function MovieCard({ dto, linkUrl }: Props) {
   return (
-    <Link to={`${linkUrl}/${id}`}>
+    <Link to={`${linkUrl}/${dto.id}`}>
       <div className="w-fit h-fit m-[0.5rem]">
         <div className="
                     relative rounded-lg overflow-hidden bg-zinc-500
@@ -21,7 +23,7 @@ export default function MovieCard({ id, title, year, posterUrl, linkUrl }: Props
                     xl:w-[12rem] xl:h-[18rem]
                     ">
 
-          <img className="w-full h-full object-cover object-center" src="/posters/interstellar.webp" />
+          <img className="w-full h-full object-cover object-center" src={`/movies/${dto.id}/poster.webp`} />
 
           <div className="absolute top-1 left-1 bg-black/70 text-white text-xs px-2  rounded">
             <p className="font-bold text-xl align-middle">D-3</p>
@@ -30,7 +32,7 @@ export default function MovieCard({ id, title, year, posterUrl, linkUrl }: Props
         </div>
 
         <p className='text-base font-medium text-base tracking-tight font-NatoSansKR'>
-          인터스텔라
+          {dto.title}
         </p>
         <div className="flex gap-1 tracking-tight items-center text-[#7E7E7E]">
           <span className = "text-xs font-NatoSansKR">평균</span>

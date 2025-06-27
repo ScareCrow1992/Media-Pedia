@@ -1,5 +1,5 @@
-import { fetchUserRegister } from "src/apis/auth";
-import { UserRegisterDTO } from "src/apis/auth/types";
+import { fetchUserRegister } from "src/apis/services/auth";
+import { UserRegisterDTO } from "src/apis/services/auth/types";
 import { useState } from "react";
 import ModalPortal from "../../ModalPortal";
 

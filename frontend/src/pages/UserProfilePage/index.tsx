@@ -1,8 +1,8 @@
 import { useUserInfo } from "src/contexts/UserInfoContext";
 import { useParams } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
-import { ProfileDTO } from "src/apis/profile/types";
-import { fetchGetProfile } from "src/apis/profile";
+import { ProfileDTO } from "src/apis/services/profile/types";
+import { fetchGetProfile } from "src/apis/services/profile";
 
 export default function UserProfilePage() {
 

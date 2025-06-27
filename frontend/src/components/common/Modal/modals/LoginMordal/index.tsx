@@ -1,5 +1,5 @@
-import { fetchLogin } from "src/apis/auth";
-import { LoginDTO } from "src/apis/auth/types";
+import { fetchLogin } from "src/apis/services/auth";
+import { LoginDTO } from "src/apis/services/auth/types";
 import { useState } from "react";
 import { useUserInfo } from "src/contexts/UserInfoContext";
 import ModalPortal from "../../ModalPortal";

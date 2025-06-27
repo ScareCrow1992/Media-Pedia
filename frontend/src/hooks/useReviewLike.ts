@@ -1,6 +1,6 @@
 import { useState } from "react";
-import { fetchToggleReviewLike } from "src/apis/review";
-import { ToggleReviewLikeResponseDto } from "src/apis/review/types";
+import { fetchToggleReviewLike } from "src/apis/services/review";
+import { ToggleReviewLikeResponseDto } from "src/apis/services/review/types";
 
 export function useReviewLike(reviewId: number, initialIsLiked: boolean, initialLikeCount: number) {
   const [isLiked, setIsLiked] = useState(initialIsLiked);

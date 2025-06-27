@@ -1,5 +1,5 @@
-import { fetchGetReviewComments } from "src/apis/review";
-import { ReviewCommentDto } from "src/apis/review/types";
+import { fetchGetReviewComments } from "src/apis/services/review";
+import { ReviewCommentDto } from "src/apis/services/review/types";
 import { useQuery } from "@tanstack/react-query";
 import ReviewComment from "src/components/common/ReviewComment";
 

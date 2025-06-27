@@ -1,4 +1,4 @@
-import { CastDTO } from "src/apis/cast/types";
+import { CastDTO } from "src/apis/services/cast/types";
 import CastAndCrewPortrait from "../CastAndCrewPortrait";
 
 interface Prop {

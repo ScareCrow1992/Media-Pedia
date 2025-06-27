@@ -1,7 +1,7 @@
 
-import { adminPostMovie } from "src/apis/admin";
+import { adminPostMovie } from "src/apis/services/admin";
 import MovieForm from "../components/Movieform";
-import { CreateMovieDto, CreateUpdateMovieDto, toCreateMovieDto } from "src/apis/admin/type";
+import { CreateMovieDto, CreateUpdateMovieDto, toCreateMovieDto } from "src/apis/services/admin/type";
 
 
 

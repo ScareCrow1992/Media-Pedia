@@ -14,7 +14,6 @@ export class ReviewCommentService {
   constructor(
     @InjectRepository(ReviewComment)
     private readonly review_commentRepo: Repository<ReviewComment>,
-
     private readonly dataSource: DataSource
   ) { }
 

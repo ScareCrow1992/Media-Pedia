@@ -1,5 +1,6 @@
 import MovieCard from "src/components/common/MovieCard";
 import HorizontalScroller from "src/components/common/HorizontalScrollerProps";
+import TopPopularCarousel from "src/components/movie/scrolls/TopPopularCarousel";
 // import MovieCard from "../../components/common/MovieCard";
 
 
@@ -15,7 +16,14 @@ export default function HomePage() {
           </svg>
         </button>
       </div>
-      <HorizontalScroller>
+      <TopPopularCarousel></TopPopularCarousel>
+
+      
+      <div className="flex">
+        <h1 className="text-xl font-bold py-4">영화 공개 예정작</h1>
+      </div>
+      <TopPopularCarousel></TopPopularCarousel>
+      {/* <HorizontalScroller>
 
         {Array.from({ length: 8 }).map((_, i) => (
           <MovieCard key={i + 1}
@@ -27,9 +35,9 @@ export default function HomePage() {
           />
         ))}
 
-      </HorizontalScroller>
+      </HorizontalScroller> */}
 
-
+{/* 
       <div className="flex">
         <h1 className="text-xl font-bold py-4">영화 공개 예정작</h1>
       </div>
@@ -76,7 +84,7 @@ export default function HomePage() {
             linkUrl={"/movies"}
           />
         ))}
-      </HorizontalScroller>
+      </HorizontalScroller> */}
     </div>
   );
 }

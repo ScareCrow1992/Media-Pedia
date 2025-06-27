@@ -1,4 +1,11 @@
-export default function RatingSummary() {
+import { MovieDetailDTO } from "src/apis/services/movie/types";
+
+interface Props{
+  movie_dto: MovieDetailDTO;
+}
+
+
+export default function RatingSummary({movie_dto} : Props) {
   return (
     <div className="text-gray-800">
       <p className="text-xs mb-1 tracking-tight font-NatoSansKR text-[#7E7E7E]">별점 그래프</p>

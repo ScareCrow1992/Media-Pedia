@@ -1,5 +1,5 @@
 import { createContext, useContext } from 'react';
-import { MovieDetailDTO } from 'src/apis/movie/types';
+import { MovieDetailDTO } from 'src/apis/services/movie/types';
 
 export interface MovieContextValue {
     movie: MovieDetailDTO;

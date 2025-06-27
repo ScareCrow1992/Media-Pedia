@@ -1,4 +1,4 @@
-import { CastDTO } from "src/apis/cast/types";
+import { CastDTO } from "src/apis/services/cast/types";
 import CastAndCrewPortrait from "../CastAndCrewPortrait";
 import CastAndCrewDesc from "../CastAndCrewDesc";
 import { Link } from "react-router-dom";

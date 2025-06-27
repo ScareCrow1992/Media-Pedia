@@ -1,9 +1,16 @@
+import { parseDateParts, parseMinutesToRunnigTime } from "src/util/date";
 import { useMovie } from "src/contexts/MoviePageContext";
 
 
 export default function MovieHeaderSection() {
 
   const { movie } = useMovie();
+
+  const {year, month, day} = parseDateParts(movie?.releaseDate);
+  // console.log(year, month, day);
+
+  const running_time = parseMinutesToRunnigTime(movie?.runningTime);
+
 
   return (
     <div className="relative h-[31rem]">
@@ -21,8 +28,8 @@ export default function MovieHeaderSection() {
         <div className="absolute bottom-[0rem] mx-[2rem] mb-16 text-white">
           <h1 className="font-bold text-4xl">{movie.title}</h1>
           <p className="text-sm mt-3">interstellar</p>
-          <p className="text-sm mt-1">2014 · 모험/드라마/SF · 미국, 영국, 캐나다</p>
-          <p className="text-sm mt-1">2시간 49분 · 12세</p>
+          <p className="text-sm mt-1">{year} · 모험/드라마/SF · 미국, 영국, 캐나다</p>
+          <p className="text-sm mt-1">{running_time} · 12세</p>
         </div>
       </div>
     </div>

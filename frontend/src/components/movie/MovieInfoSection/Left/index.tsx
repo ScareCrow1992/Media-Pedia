@@ -1,4 +1,4 @@
-import { MovieDetailDTO } from "src/apis/movie/types";
+// import { MovieDetailDTO } from "src/apis/services/movie/types";
 import PosterImage from "./PosterImage"
 import RatingGraph from "./RatingGraph";
 import RatingSummary from "./RatingSummary";
@@ -11,8 +11,8 @@ export default function MovieInfoLeftPanel() {
   const { movie } = useMovie();
   return (
     <div className="w-[20rem] flex flex-col gap-6">
-      <PosterImage />
-      <RatingSummary />
+      <PosterImage movie_dto={movie} />
+      <RatingSummary movie_dto={movie} />
       <RatingGraph />
     </div>
   );

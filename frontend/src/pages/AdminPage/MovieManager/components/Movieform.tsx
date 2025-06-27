@@ -3,9 +3,9 @@ import { Calendar } from "src/components/ui/calendar";
 import { Popover, PopoverTrigger, PopoverContent } from "src/components/ui/popover";
 import { format } from "date-fns";
 import { useNavigate, useParams } from "react-router-dom";
-import { CreateUpdateMovieDto  } from "src/apis/admin/type";
-import { adminPostMovie } from "src/apis/admin";
-import { MovieDetailDTO } from "@/apis/movie/types";
+import { CreateUpdateMovieDto  } from "src/apis/services/admin/type";
+import { adminPostMovie } from "src/apis/services/admin";
+import { MovieDetailDTO } from "src/apis/services/movie/types";
 import { useEffect } from "react";
 
 interface Props {
