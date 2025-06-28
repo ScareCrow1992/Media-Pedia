@@ -6,6 +6,8 @@ import MovieCard from "src/components/common/MovieCard";
 
 export default function MovieManager() {
 
+  return(<></>);
+  /*
   const [movieList, setMovieList] = useState<MovieDetailDTO[]>([]);
 
   const handleRefresh = async () => {
@@ -54,4 +56,5 @@ export default function MovieManager() {
       </div>
     </div>
   );
+  */
 }
