@@ -34,6 +34,7 @@ export class ReviewReport {
   user: User;
 
   @Column({
+   	name: 'report_type',
     type: 'enum',
     enum: ReportType,
   })

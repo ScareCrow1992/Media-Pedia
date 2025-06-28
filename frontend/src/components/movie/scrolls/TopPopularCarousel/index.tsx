@@ -5,8 +5,6 @@ import HorizontalScroller from "src/components/common/HorizontalScrollerProps";
 import MovieCard from "src/components/common/MovieCard";
 
 
-
-
 export default function TopPopularCarousel() {
 
   const {
@@ -17,10 +15,6 @@ export default function TopPopularCarousel() {
     queryKey: ['TopPopularCarousel', 0],
     queryFn: () => fetchGetLatestMovies(12)
   });
-
-
-
-  // fetchGetLatestMovies(12)
 
   return (
     <>
@@ -42,5 +36,4 @@ export default function TopPopularCarousel() {
       </HorizontalScroller>
     </>
   );
-
 }

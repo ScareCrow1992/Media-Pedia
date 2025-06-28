@@ -2,14 +2,17 @@ import { Controller, Get, Param, ParseIntPipe, UseGuards } from '@nestjs/common'
 import { ProfileDTO } from '../users/dto/get-user-profile.dto';
 import { ProfileService } from './profile.service';
 import { JwtAuthGuard } from '../auth/guards/jwt-auth.guard';
-import { ApiBearerAuth, ApiHeader, ApiOperation, ApiResponse } from '@nestjs/swagger';
-import { ParseUserPipe } from 'src/common/pipes/parse-user.pipe';
+import { ApiBearerAuth, ApiOperation, ApiResponse } from '@nestjs/swagger';
 import { UserInfo } from 'src/common/decorators/user.decorator';
+import { ReviewsService } from '../reviews/reviews.service';
 
 @Controller('profile')
 export class ProfileController {
 
-  constructor(private readonly profileService: ProfileService) { }
+  constructor(
+    private readonly profileService: ProfileService,
+    private readonly reviewService: ReviewsService,
+  ) { }
 
 
   @Get(":id")
@@ -24,7 +27,16 @@ export class ProfileController {
   async findUserProfile(
     @UserInfo() user_info,
     @Param('id', ParseIntPipe) user_id: number
-  ): Promise<ProfileDTO> {    
+  ): Promise<ProfileDTO> {
     return this.profileService.findUserProfile(user_id);
+  }
+
+
+  @Get(":user_id/reviews")
+  async getUserReviewWithMovie(
+    @Param("user_id") user_id: number
+  ) {
+    // console.log("getUserReviewWithMovie", user_id);
+    return this.reviewService.getUserReviewWithMovie(user_id);
   }
 }

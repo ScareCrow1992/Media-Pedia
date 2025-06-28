@@ -1,5 +1,3 @@
-import MovieCard from "src/components/common/MovieCard";
-import HorizontalScroller from "src/components/common/HorizontalScrollerProps";
 import TopPopularCarousel from "src/components/movie/scrolls/TopPopularCarousel";
 // import MovieCard from "../../components/common/MovieCard";
 

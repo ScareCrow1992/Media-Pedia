@@ -48,7 +48,7 @@ async function bootstrap() {
       likeSet.add(key);
       likeCount++;
     } catch (err) {
-      console.warn(`❌ 좋아요 실패: user=${user.id}, review=${review.id}`);
+      console.warn(`좋아요 실패: user=${user.id}, review=${review.id}`);
     }
 
   }

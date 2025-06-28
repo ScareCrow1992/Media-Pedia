@@ -60,7 +60,7 @@ export class ReviewsController {
   async getReview(
     @UserInfo() user_info,
     @Param('review_id', ParseIntPipe) review_id: number
-  ) : Promise<ReviewDto> {
+  ): Promise<ReviewDto> {
 
     return await this.reviewsService.getReview(review_id, user_info);
   }
@@ -111,7 +111,6 @@ export class ReviewsController {
   }
 
 
-
   // 리뷰 좋아요 토글
   @Post(':id/like')
   @UseGuards(JwtAuthGuard)
@@ -125,11 +124,10 @@ export class ReviewsController {
   }
 
 
-
   @Get(':review_id/likes')
   async getLikedUsersByReviewId(
     @Param('review_id') review_id: number
-  ){
+  ) {
     return await this.reviewsService.getLikedUsersByReviewId(review_id);
   }
 

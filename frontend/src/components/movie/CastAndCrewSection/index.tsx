@@ -1,8 +1,3 @@
-import HorizontalScroller from "src/components/common/HorizontalScrollerProps";
-import MovieCard from "src/components/common/MovieCard";
-import SnapScrollItem from "src/components/common/SnapScrollItem";
-import SnapScrollList from "src/components/common/SnapScrollList";
-import CastAndCrewCard from "./CastAndCrewCard";
 import CastAndCrewScroll from "./CastAndCrewScroll";
 import { CastDTO } from "src/apis/services/cast/types";
 import { useQuery } from "@tanstack/react-query";

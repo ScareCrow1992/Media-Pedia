@@ -1,4 +1,4 @@
-import { IsBoolean, IsInt, IsString, Max, Min } from 'class-validator';
+import { IsBoolean, IsDate, IsInt, IsString, Max, Min } from 'class-validator';
 
 export class ReviewDto {
   @IsInt()
@@ -27,6 +27,9 @@ export class ReviewDto {
   @IsInt()
   comments_count: number;
 
+  @IsDate()
+  created_at : Date;
+
   static fromRaw(raw: any): ReviewDto {
 
 
@@ -38,7 +41,8 @@ export class ReviewDto {
       nickname: raw.nickname,
       is_liked: raw.is_liked,
       likes_count: Number(raw.likes_count),
-      comments_count: Number(raw.comments_count)
+      comments_count: Number(raw.comments_count),
+      created_at : raw.created_at
     };
   }
 }

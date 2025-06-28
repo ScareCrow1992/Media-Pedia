@@ -1,5 +1,5 @@
 import { useUserInfo } from "src/contexts/UserInfoContext";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
 import { ProfileDTO } from "src/apis/services/profile/types";
 import { fetchGetProfile } from "src/apis/services/profile";
@@ -88,10 +88,10 @@ export default function UserProfilePage() {
 
       {/* 하단 요약 영역 */}
       <div className="mt-6 border-t pt-6 grid grid-cols-3 text-center text-sm text-gray-700">
-        <div>
+        <Link to={`reviews`}>
           <div className="text-xl font-bold">{profile_review_cnt}</div>
           <div className="mt-1">평가</div>
-        </div>
+        </Link>
         <div>
           <div className="text-xl font-bold">0</div>
           <div className="mt-1">코멘트</div>

@@ -4,10 +4,6 @@ import { Link } from "react-router-dom";
 type Props = {
   dto : MovieDetailDTO;
   linkUrl: string;
-  // id: number;
-  // title: string;
-  // year: number;
-  // posterUrl: string;
 };
 
 export default function MovieCard({ dto, linkUrl }: Props) {

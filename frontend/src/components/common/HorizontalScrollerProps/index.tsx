@@ -1,6 +1,3 @@
-import MovieCard from "../MovieCard";
-import { HorizontalScrollerProps } from "./type";
-
 interface Props{
   children: React.ReactNode;
 }

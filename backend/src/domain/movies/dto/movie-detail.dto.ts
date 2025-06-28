@@ -12,54 +12,54 @@ import { MovieDirectorDto } from './movie-director.dto';
 
 export class MovieDetailDto {
 
-  @ApiProperty({nullable: true})
+  @ApiProperty({ nullable: true })
   id: number;
-  
+
   @ApiProperty()
   title: string;
-  
+
   @ApiProperty()
   slug: string;
-  
+
   @ApiProperty()
   description: string;
-  
+
   @ApiProperty()
   releaseDate: Date;
-  
-  
+
+
   @ApiProperty()
   runningTime: number;
-  
-  
+
+
   @ApiProperty()
   ageRating: string;
-  
-  
+
+
   @ApiProperty()
   country: string;
-  
-  
+
+
   @ApiProperty()
   language: string;
-  
-  
+
+
   @ApiProperty()
   thumbnailUrl: string;
 
-  
+
   @ApiProperty()
   genres: string[];
-  
-  
+
+
   @ApiProperty()
   casts: MovieCastDto[];
-  
-  
+
+
   @ApiProperty()
   directors: MovieDirectorDto[];
-  
-  
+
+
   @ApiProperty()
   keywords: string[];
 
@@ -87,4 +87,30 @@ export class MovieDetailDto {
     */
     return dto;
   }
+
+  static fromRaw(movie: any): MovieDetailDto {
+    const dto = new MovieDetailDto();
+
+    dto.id = movie.id;
+    dto.title = movie.title;
+    dto.slug = movie.slug;
+    dto.description = movie.description;
+    dto.releaseDate = movie.releaseDate;
+    dto.runningTime = movie.runningTime;
+    dto.ageRating = movie.ageRating;
+    dto.country = movie.country;
+    dto.language = movie.language;
+    dto.thumbnailUrl = movie.thumbnailUrl;
+
+    dto.genres = movie.genres?.map(g => g.genre) || [];
+    // dto.directors = movie.directors?.map(d => d.directorName) || [];
+    dto.keywords = movie.keywords?.map(k => k.keyword) || [];
+    /*
+    dto.casts = movie.casts?.map(c => ({
+      name: c.castName
+    })) || [];
+    */
+    return dto;
+  }
+
 }

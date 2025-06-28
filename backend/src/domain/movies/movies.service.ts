@@ -14,15 +14,15 @@ export class MoviesService {
 
   async getLatestMovies(limit_cnt: number): Promise<MovieDetailDto[]> {
 
-    if(typeof limit_cnt !== 'number' || !Number.isInteger(limit_cnt)){
+    if (typeof limit_cnt !== 'number' || !Number.isInteger(limit_cnt)) {
       throw new BadRequestException('잘못된 ID입니다.');
     }
 
-    if(limit_cnt > 50)
+    if (limit_cnt > 50)
       limit_cnt = 50;
 
     const raw_datas = await this.movieRepository.find({
-      order: {releaseDate: 'ASC'},
+      order: { releaseDate: 'DESC' },
       take: limit_cnt
     });
 
@@ -35,7 +35,7 @@ export class MoviesService {
     return result;
   }
 
-  
+
   async findById(id: number): Promise<MovieDetailDto> {
     const movie_entity = await this.movieRepository.findOne({ where: { id } });
 

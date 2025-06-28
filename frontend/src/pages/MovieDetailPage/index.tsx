@@ -22,6 +22,7 @@ export default function MovieDetailPage() {
     queryKey: ['movie', id],
     queryFn: () => fetchMovieById(id!),
     enabled: !!id,
+    retry: 2
   });
 
   if (isLoading) {

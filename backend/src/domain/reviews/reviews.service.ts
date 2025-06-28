@@ -9,6 +9,7 @@ import { ReviewLike } from './entities/review-like.entity';
 import { ToggleReviewLikeResponseDto } from './dto/toggle-revie-like-response.dto';
 import { EditReviewDto } from './dto/edit-review.dto';
 import { UserDto } from '../users/dto/user.dto';
+import { UserReviewWithMovieDto } from './dto/user-review-with-movie.dto';
 
 @Injectable()
 export class ReviewsService {
@@ -348,6 +349,31 @@ export class ReviewsService {
     // console.log(rawUsers);
 
     return rawUsers.map(UserDto.fromRaw);
+  }
+
+
+
+  async getUserReviewWithMovie(user_id: number) : Promise<UserReviewWithMovieDto[]> {
+    const raws = await this.reviewRepo.createQueryBuilder('reviews')
+      .innerJoin('reviews.movie', 'movies')
+      .where('reviews.user_id = :user_id', { user_id })
+      .select([
+        'reviews.id AS review_id',
+        'reviews.rating AS review_rating',
+        'reviews.content AS review_content',
+        'reviews.created_at AS review_created_at',
+        'movies.id AS movie_id',
+        'movies.title AS movie_title',
+        'movies.slug AS movie_slug',
+        'movies.release_date AS movie_releaseDate',
+        'movies.running_time AS movie_runningTime'
+      ])
+      .getRawMany();
+
+    // console.log(raws);
+
+    return raws.map(UserReviewWithMovieDto.fromRaw);
+
   }
 
 }

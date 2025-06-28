@@ -1,8 +1,5 @@
-import { fetchGetLatestMovies } from "src/apis/services/movie";
 import { Link } from "react-router-dom";
-import { MovieDetailDTO } from "src/apis/services/movie/types";
 import { useState } from "react";
-import MovieCard from "src/components/common/MovieCard";
 import CastAndCrewCard from "src/components/movie/CastAndCrewSection/CastAndCrewCard";
 import { fetchGetCasts } from "src/apis/services/cast";
 import { CastDTO } from "src/apis/services/cast/types";
