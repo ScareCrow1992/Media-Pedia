@@ -1,9 +1,9 @@
 import { fetchGetLatestMovies, MovieListResponse } from "src/apis/services/movie";
-import { MovieDetailDTO } from "src/apis/services/movie/types";
 import { useInfiniteQuery, useQuery } from "@tanstack/react-query";
 import HorizontalScroller from "src/components/common/HorizontalScrollerProps";
 import MovieCard from "src/components/common/MovieCard";
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
+import FadeInGlobal from "src/components/common/FadeInGlobal";
 
 
 export default function TopPopularCarousel() {
@@ -18,9 +18,6 @@ export default function TopPopularCarousel() {
     queryFn: () => fetchGetLatestMovies(12)
   });
   */
-
-  const INIT_BATCH_SIZE = 12;
-
 
   const {
     data,
@@ -69,7 +66,10 @@ export default function TopPopularCarousel() {
         ) : (
           <>
             {allMovies.map((movie_dto, i) => (
-              <MovieCard key={movie_dto.id} dto={movie_dto} linkUrl="/movies" />
+
+              <FadeInGlobal key={movie_dto.id}>
+                <MovieCard key={movie_dto.id} dto={movie_dto} linkUrl="/movies" />
+              </FadeInGlobal>
             ))}
             <div ref={observerRef} className="w-[1px] h-[1px]" />
             {isFetchingNextPage && (

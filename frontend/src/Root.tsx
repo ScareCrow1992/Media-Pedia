@@ -1,11 +1,6 @@
-import { useQuery } from "@tanstack/react-query";
 import { Outlet } from "react-router-dom";
 import Navbar from "src/components/common/Navbar";
-import { UserCredential } from "./apis/services/user/types";
-import { fetchTesterLogin } from "./apis/services/user";
-import UserChanger from "./components/DBG/UserChanger";
-import { useState } from "react";
-import { UserInfoContext, UserInfoProvider } from "./contexts/UserInfoContext";
+import { UserInfoProvider } from "./contexts/UserInfoContext";
 
 export default function Root() {
 
@@ -20,12 +15,13 @@ export default function Root() {
   });
   */
 
-  const [user, setUser] = useState<UserCredential | null>(null);
+  // const [user, setUser] = useState<UserCredential | null>(null);
   // console.log(setUser)
   // console.log(user);
   // console.log(env);
 
-  const cdnBaseUrl = process.env.REACT_APP_CDN_PATH;
+  // const cdnBaseUrl = process.env.REACT_APP_CDN_PATH;
+
 
   return (
 

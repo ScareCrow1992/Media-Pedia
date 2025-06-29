@@ -9,7 +9,6 @@ import MovieReviewCard from "src/components/common/MovieReviewCard";
 export default function UserReviewListPage() {
   const { id } = useParams();
 
-  // UserReviewWithMovieDto
   const {
     data: review_with_movie,
     isLoading,
@@ -27,8 +26,6 @@ export default function UserReviewListPage() {
     return <div className="text-red-500 text-center mt-10">리뷰 정보를 불러올 수 없습니다.</div>;
   }
 
-  // console.log(review_with_movie);
-  // MovieCard
   return (
     <div className="mt-navH">
       <div className="mx-auto max-w-screen-xl">
@@ -38,9 +35,8 @@ export default function UserReviewListPage() {
         <div className="grid gap-4 grid-cols-[repeat(auto-fill,minmax(120px,1fr))]">
           {review_with_movie.map(({ review_dto, movie_dto }, key_) => {
             return (
-              <div key = {key_}>
-                <MovieReviewCard review_dto= {review_dto} movie_dto={movie_dto} linkUrl="/movies"/>
-                {/* <MovieCard dto = {movie_dto} linkUrl = {"/movies"}/> */}
+              <div key={key_}>
+                <MovieReviewCard review_dto={review_dto} movie_dto={movie_dto} linkUrl="/movies" />
               </div>
             )
           })}

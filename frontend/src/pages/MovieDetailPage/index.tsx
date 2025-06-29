@@ -53,7 +53,7 @@ export default function MovieDetailPage() {
           </PageSection>
 
           <PageSection
-            title="코멘트"
+            title="리뷰"
             marginX={sectionMarginX}
             link={`/reviews/${id}`}
             marginY="my-20">

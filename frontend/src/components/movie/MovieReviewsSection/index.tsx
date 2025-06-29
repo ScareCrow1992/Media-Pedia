@@ -34,7 +34,24 @@ export default function MovieReviewsSection() {
   const padding = "p-[0.25rem]"
   return (
     <>
-      <div className="grid grid-cols-4 grid-rows-2">
+      {/* 모바일 가로: 수평 스크롤 */}
+      <div className="block sm:hidden overflow-x-auto snap-x snap-mandatory">
+        <div className="flex w-full ㅈ-">
+          {reviews?.map((review, idx) => (
+            <div key={review.id} className="snap-start w-full shrink-0 px-4 py-3">
+              <div className="h-[21rem]">
+                <ReviewCard
+                  review_card_url={`/review_detail/${review.id}`}
+                  review={review}
+                />
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      {/* 태블릿 이상: 고정형 그리드 */}
+      <div className="hidden sm:grid grid-cols-2 grid-rows-4 lg:grid-cols-4 lg:grid-rows-2 ">
         {
           reviews?.map(review => (
             <div key={review.id} className={`h-[21rem] ${padding}`}>

@@ -40,12 +40,12 @@ export default function Navbar() {
           </Link>
 
           {/* 가운데 메뉴 */}
-          <ul className="hidden md:flex gap-6 text-sm font-medium">
+          {/* <ul className="hidden md:flex gap-6 text-sm font-medium">
             <li><Link to="/movies">영화</Link></li>
             <li><Link to="/series">시리즈</Link></li>
             <li><Link to="/books">책</Link></li>
             <li><Link to="/webtoon">웹툰</Link></li>
-          </ul>
+          </ul> */}
 
           {/* 오른쪽 유저 영역 */}
           <div className="flex items-center gap-4">
