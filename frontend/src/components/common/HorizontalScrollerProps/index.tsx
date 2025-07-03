@@ -4,7 +4,7 @@ interface Props{
 
 export default function HorizontalScroller ({children}: Props) {
   return (
-    <div className="flex overflow-x-auto whitespace-nowrap p-4 scrollbar-hide">
+    <div className="flex overflow-x-auto whitespace-nowrap p-2 scrollbar-hide">
           {children}
 
       {/* <div className="inline-block w-40 h-60 rounded-md bg-red-300 mr-4">Item 1</div>

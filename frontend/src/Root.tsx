@@ -36,6 +36,12 @@ export default function Root() {
         <main>
           <Outlet />
         </main>
+        <footer className="bg-black text-white py-8 text-center">
+          <p className="text-sm text-[#A0A0A0]">
+            © 2025 MediaPedia. This project is open-source and non-commercial.<br />
+            Built for learning and portfolio purposes only.
+          </p>
+        </footer>
       </div>
     </UserInfoProvider >
   );
