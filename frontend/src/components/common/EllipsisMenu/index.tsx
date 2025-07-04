@@ -3,7 +3,7 @@ import { ReactNode, useEffect, useRef, useState } from "react";
 
 interface EllipsisMenuProps {
   children: ReactNode,
-  className: string
+  className?: string
 }
 
 export default function EllipsisMenu({ children, className }: EllipsisMenuProps) {
@@ -32,8 +32,9 @@ export default function EllipsisMenu({ children, className }: EllipsisMenuProps)
         <Ellipsis className="w-5 h-5 cursor-pointer" />
       </button>
 
+      {/* whitespace-nowrap : 텍스트가 한줄로 유지되도록 설정한다 (w-auto와 연계됨) */}
       {showMenu && (
-        <div className="flex flex-col absolute p-2 right-8 bottom-[-1.5rem] mt-2 w-32 bg-white rounded-xl shadow-[0_0_12px_rgba(0,0,0,0.4)] z-10">
+        <div className="flex flex-col absolute p-2 right-8 bottom-[-1.5rem] mt-2 w-auto bg-white rounded-xl shadow-[0_0_12px_rgba(0,0,0,0.4)] z-10 whitespace-nowrap">
           {children}
         </div>
       )}

@@ -52,6 +52,7 @@ export default function ReviewCard({ review_card_url, review }: Prop) {
 
       {/* 하단 기능 바 */}
       <ReviewCardFooter
+        review={review}
         likeCnt={likeCnt}
         comments_count={review.comments_count}
         isLiked={isLiked}
@@ -107,7 +108,7 @@ export default function ReviewCard({ review_card_url, review }: Prop) {
         <ConfirmModal
           message="리뷰를 삭제하시겠어요?"
           isOpen={delete_isOpen}
-          onConfirm={()=>{
+          onConfirm={() => {
             //fetch
             fetchDeleteReview(review.id);
             delete_closeModal();

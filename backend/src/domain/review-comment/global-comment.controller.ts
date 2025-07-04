@@ -12,9 +12,6 @@ export class GlobalCommentController {
   ) { }
 
 
-
-
-
   @Post(':comment_id/like')
   @UseGuards(JwtAuthGuard)
   @ApiTags("Comment")
@@ -22,11 +19,6 @@ export class GlobalCommentController {
     @UserInfo() user_info,
     @Param("comment_id") comment_id: number) {
 
-    // console.log("user_info", user_info);
-    // console.log("comment_id", comment_id);
-
     return this.reviewCommentService.toggleCommentLike(user_info.id, comment_id);
   }
-
-
 }

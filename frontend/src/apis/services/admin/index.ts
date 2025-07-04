@@ -1,5 +1,5 @@
-import { apiPublicClient } from "../../client";
-import { CreateCastDto, CreateMovieDto, CreateUpdateMovieDto, UpdateMovieDto } from "./type";
+import { apiPublicClient, apiStrictAuthclient } from "../../client";
+import { CreateCastDto, CreateMovieDto, CreateUpdateMovieDto, GetReportsDto, UpdateMovieDto } from "./type";
 
 export const adminPostMovie = async (createMovieDTO: CreateMovieDto) => {
   const res = await apiPublicClient.post("/admin/movies", createMovieDTO);
@@ -20,5 +20,11 @@ export const adminPostCast = async (createCastDTO: CreateCastDto) => {
 
 export const adminUpdateCast = async (cast_id: string, createCastDTO: CreateCastDto) => {
   const res = await apiPublicClient.patch(`/admin/cast/${cast_id}`, createCastDTO);
+  return res.data;
+}
+
+
+export const adminGetReports= async (page: number, limit: number) /*: Promise<GetReportsDto>*/  => {
+  const res = await apiStrictAuthclient.get(`admin/reports?page=${page}&limit=${limit}`);
   return res.data;
 }

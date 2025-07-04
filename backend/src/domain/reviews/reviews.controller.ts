@@ -43,7 +43,6 @@ export class ReviewsController {
   // =================================
   @Get('preview/movie/:movie_id')
   @UseGuards(OptionalJwtAuthGuard)
-
   @ApiTags('Review')
   @ApiDocsForPreviewReview()
   async getPreviewReviewsForMovie(

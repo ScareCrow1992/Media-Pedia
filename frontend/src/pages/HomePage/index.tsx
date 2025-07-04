@@ -24,7 +24,7 @@ export default function HomePage() {
         <TopPopularCarousel></TopPopularCarousel>
       </div>
 
-      
+
       <div>
         <div className="flex">
           <h1 className="text-xl tracking-tight font-NatoSansKR font-bold">공개 예정작</h1>

@@ -4,8 +4,8 @@ import {
 } from 'typeorm';
 import { User } from 'src/domain/users/entities/user.entity';
 // import { Comment } from 'src/domain/reviews/entities/comment.entity';
-import { ReportType } from './review-report.entity';
 import { ReviewComment } from 'src/domain/review-comment/entities/review-comment.entity';
+import { ReportType } from 'src/domain/reviews/entities/review-report.entity';
 
 @Entity('review_comment_reports')
 @Unique(['user', 'comment'])

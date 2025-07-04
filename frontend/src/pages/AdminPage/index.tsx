@@ -17,6 +17,9 @@ export default function AdminPage() {
             <Link to="/admin/casts" className={isActive("/admin/casts") ? "font-bold bg-zinc-800 p-2 block" : "p-2 block"}>
               🧑‍🎤 배우
             </Link>
+            <Link  to="/admin/reports" className={isActive("/admin/reports") ? "font-bold bg-zinc-800 p-2 block" : "p-2 block"}>
+              🚨 신고
+            </Link>
           </div>
 
           {/* <div className="absolute bottom-4 left-4 text-xs opacity-70">

@@ -2,8 +2,11 @@ import DeleteButton from "src/components/common/DeleteButton";
 import CommentButton from "src/components/common/Comment";
 import EditButton from "src/components/common/EditButton";
 import LikeToggleButton from "src/components/common/LikeToggleButton";
+import ReviewReportMenu from "./ReviewReportMenu";
+import { ReviewDTO } from "src/apis/services/review/types";
 
 interface ReviewCardFooterProps {
+  review: ReviewDTO;
   likeCnt: number;
   comments_count: number;
   isLiked: boolean;
@@ -17,6 +20,7 @@ interface ReviewCardFooterProps {
 
 
 export default function ReviewCardFooter({
+  review,
   likeCnt,
   comments_count,
   isLiked,
@@ -50,7 +54,7 @@ export default function ReviewCardFooter({
         </div>
         <EditButton onClick={onEditClick} className="w-6 h-6 ml-auto" />
         <DeleteButton onClick={onTryDelete} className="w-6 h-6" />
-
+        <ReviewReportMenu review={review}/>
       </div>
     </div>
   );

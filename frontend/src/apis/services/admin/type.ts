@@ -70,3 +70,22 @@ export interface CreateCastDto{
   name: string;
 }
 
+
+//============================
+
+export interface ReportItemDto {
+  id: number;
+  reviewId: number;
+  reportType: string;
+  createdAt: string;
+  reporterName: string;
+  status: string;
+}
+
+
+export interface GetReportsDto {
+  reports: ReportItemDto[];
+  totalCount: number;
+  currentPage: number;
+  totalPages: number;
+}

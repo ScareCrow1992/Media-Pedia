@@ -4,6 +4,7 @@ import { AdminCastModule } from 'src/domain/cast/admin/admin-cast.module';
 import { AdminDirectorModule } from 'src/domain/director/admin/admin-director.module';
 import { AdminUsersModule } from 'src/domain/users/admin/admin-users.module';
 import { AdminAuthModule } from 'src/domain/auth/admin/admin-auth.module';
+import { AdminReportsModule } from 'src/domain/reports/admin/admin-reports.module';
 
 @Module({
   imports: [
@@ -11,7 +12,8 @@ import { AdminAuthModule } from 'src/domain/auth/admin/admin-auth.module';
     AdminCastModule,
     AdminDirectorModule,
     AdminUsersModule,
-    AdminAuthModule
+    AdminAuthModule,
+    AdminReportsModule
   ]
 })
 export class AdminModule {}

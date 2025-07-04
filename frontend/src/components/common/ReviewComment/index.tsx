@@ -2,15 +2,12 @@ import { fetchToggleReviewCommentLike } from "src/apis/services/review";
 import { ReviewCommentDto, ToggleReviewCommentLikeResponseDto } from "src/apis/services/review/types";
 import { useState } from "react";
 import LikeToggleButton from "../LikeToggleButton";
-import { Ellipsis } from "lucide-react";
-import DropdownMenu from "../EllipsisMenu";
 import EllipsisMenu from "../EllipsisMenu";
 
 
 interface ReviewCommentProp {
   reviewCommentDto: ReviewCommentDto
 }
-
 
 
 export default function ReviewComment({ reviewCommentDto }: ReviewCommentProp) {

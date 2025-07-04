@@ -4,15 +4,12 @@ import {
 } from 'typeorm';
 import { User } from 'src/domain/users/entities/user.entity';
 import { Review } from 'src/domain/reviews/entities/review.entity';
+import { ReportType } from 'src/domain/reviews/entities/review-report.entity';
 
-export enum ReportType {
-  SPOILER = 'spoiler',
-  INAPPROPRIATE = 'inappropriate',
-}
 
 @Entity('review_reports')
 @Unique(['user', 'review']) // 한 유저가 같은 리뷰를 중복 신고하지 못하게
-export class ReviewReport {
+export class ReviewReport_DEP_ {
   @PrimaryGeneratedColumn()
   id: number;
 

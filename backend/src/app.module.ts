@@ -29,7 +29,7 @@ import { APP_GUARD } from '@nestjs/core';
       password: 'watcha_pw123',
       database: 'watcha_clone_db',
       entities: [__dirname + '/domain/**/*.entity{.ts,.js}'],
-      synchronize: true, // 개발 중엔 true, 운영에선 false!
+      synchronize: false, // 개발 중엔 true, 운영에선 false!
       // logging:['query', 'schema']
     }),
     ConfigModule.forRoot({
