@@ -14,7 +14,7 @@ export default function MovieCard({ dto, linkUrl, label, bottomInfo }: Props) {
     <Link to={`${linkUrl}/${dto.id}`}>
       <div className="w-fit h-fit m-[0.5rem]">
         <div className="
-                    relative rounded-lg overflow-hidden bg-zinc-500
+                    relative rounded-lg overflow-hidden bg-zinc-200
                     w-[8rem] h-[12rem]
                     sm:w-[8rem] sm:h-[12rem]
                     md:w-[12rem] md:h-[18rem]

@@ -10,7 +10,7 @@ import { useMovie } from "src/contexts/MoviePageContext";
 export default function MovieInfoLeftPanel() {
   const { movie } = useMovie();
   return (
-    <div className="w-[20rem] flex flex-col gap-6">
+    <div className="w-[24rem] flex flex-col gap-6">
       <PosterImage movie_dto={movie} />
       <RatingSummary movie_dto={movie} />
       <RatingGraph />

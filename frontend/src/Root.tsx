@@ -26,14 +26,14 @@ export default function Root() {
   return (
 
     <UserInfoProvider>
-      <div className="min-h-screen text-black">
+      <div className="flex flex-col min-h-screen text-black">
         <Navbar />
         {/* {
           <>
             {users && (<UserChanger users={users} onSelectUser={setUser} />)}
           </>
         } */}
-        <main>
+        <main className= "flex-grow">
           <Outlet />
         </main>
         <footer className="bg-black text-white py-8 text-center">

@@ -65,8 +65,6 @@ export default function ContentEditModal({ isOpen, onClose, onSubmit }: ContentE
           </div>
         </div>
       </div>
-
     </ModalPortal>
-
   );
 }

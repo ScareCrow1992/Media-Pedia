@@ -4,6 +4,7 @@ import HorizontalScroller from "src/components/common/HorizontalScrollerProps";
 import MovieCard from "src/components/common/MovieCard";
 import { useEffect, useRef, useState } from "react";
 import FadeInGlobal from "src/components/common/FadeInGlobal";
+import MovieCardSkeleton from "src/components/common/MovieCard/MovieCardSkeleton";
 
 
 export default function TopPopularCarousel() {
@@ -59,7 +60,11 @@ export default function TopPopularCarousel() {
     <>
       <HorizontalScroller>
         {isLoading ? (
-          <div className="text-center text-gray-500 mt-10">불러오는 중...</div>
+          <div className="flex">
+            {Array.from({ length: 6 }).map((_, i) => (
+              <MovieCardSkeleton key={i} />
+            ))}
+          </div>
         ) : isError ? (
           <div className="text-center text-red-500 mt-10">영화 정보를 불러올 수 없습니다.</div>
         ) : allMovies.length === 0 ? (

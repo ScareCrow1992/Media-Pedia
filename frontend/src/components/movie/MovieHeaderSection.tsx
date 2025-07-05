@@ -26,7 +26,7 @@ export default function MovieHeaderSection() {
       />
       <div className="mx-[0rem] sm:mx-[2rem] md:mx-[4rem] lg:mx-[6rem] xl:mx-[12rem]">
         <div className="absolute bottom-[0rem] mx-[2rem] mb-16 text-white">
-          <h1 className="font-bold text-4xl">{movie.title}</h1>
+          <h1 className="font-bold tracking-tight font-NatoSansKR text-4xl">{movie.title}</h1>
           <p className="text-sm mt-3">interstellar</p>
           <p className="text-sm mt-1">{year} · 모험/드라마/SF · 미국, 영국, 캐나다</p>
           <p className="text-sm mt-1">{running_time} · 12세</p>

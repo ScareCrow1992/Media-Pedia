@@ -27,8 +27,11 @@ export default function ReviewsPage() {
 
   return (
     <>
-      <div className="w-full flex justify-center">
-        <div className="flex flex-col gap-[1rem] w-[45rem]">
+      <div className="mt-navH w-full flex justify-center">
+        <div className="flex flex-col gap-[1rem] w-[42rem]">
+          <div className="h-[2rem]"/>
+          <h1  className="text-3xl tracking-tight font-NatoSansKR font-bold mb-4">리뷰</h1>
+          <div className="h-[2rem]"/>
           {
             reviews?.map(review => (
               <div key={review.id} className="h-[17rem] p-[0.25rem]">

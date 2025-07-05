@@ -4,6 +4,7 @@ import HorizontalScroller from "src/components/common/HorizontalScrollerProps";
 import MovieCard from "src/components/common/MovieCard";
 import { useEffect, useRef, useState } from "react";
 import FadeInGlobal from "src/components/common/FadeInGlobal";
+import MovieCardSkeleton from "src/components/common/MovieCard/MovieCardSkeleton";
 
 
 export default function UpcomingMoviesCarousel() {
@@ -16,7 +17,7 @@ export default function UpcomingMoviesCarousel() {
     isLoading,
     isError
   } = useInfiniteQuery<MovieListResponse, Error>({
-    queryKey: ['TopPopularCarousel'],
+    queryKey: ['UpcomingMoviesCarousel'],
     queryFn: ({ pageParam = 1 }) =>
       fetchGetLatestMovies({ page: pageParam as number, size: 12 }),
     getNextPageParam: (lastPage, allPages) =>
@@ -48,23 +49,25 @@ export default function UpcomingMoviesCarousel() {
     <>
       <HorizontalScroller>
         {isLoading ? (
-          <div className="text-center text-gray-500 mt-10">불러오는 중...</div>
+          <div className="flex">
+            {Array.from({ length: 6 }).map((_, i) => (
+              <MovieCardSkeleton key={i} />
+            ))}
+          </div>
         ) : isError ? (
           <div className="text-center text-red-500 mt-10">영화 정보를 불러올 수 없습니다.</div>
         ) : allMovies.length === 0 ? (
           <div className="text-center text-gray-400 mt-10">아직 영화가 없습니다.</div>
         ) : (
           <>
-            {allMovies.map((movie_dto, i) => (
-
+            {allMovies.map((movie_dto) => (
               <FadeInGlobal key={movie_dto.id}>
                 <MovieCard
-                  key={movie_dto.id}
                   dto={movie_dto}
                   linkUrl="/movies"
-                  label="D-3" 
-                  bottomInfo = {<p className="tracking-tight font-NatoSansKR text-sm text-[#FF2F6E]">2025.07.04</p>}
-                  />
+                  label="D-3"
+                  bottomInfo={<p className="tracking-tight font-NatoSansKR text-sm text-[#FF2F6E]">2025.07.04</p>}
+                />
               </FadeInGlobal>
             ))}
             <div ref={observerRef} className="w-[1px] h-[1px]" />
@@ -76,6 +79,7 @@ export default function UpcomingMoviesCarousel() {
           </>
         )}
       </HorizontalScroller>
+
     </>
   );
 }

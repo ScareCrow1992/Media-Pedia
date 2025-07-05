@@ -23,7 +23,7 @@ export default function PageSection({
   //
 
   return (
-    <div className={`mx-[0rem] sm:mx-[2rem] md:mx-[4rem] lg:mx-[6rem] xl:mx-[12rem] ${marginY}`}>
+    <div className={`mx-auto max-w-screen-2xl px-4 sm:px-8 md:px-12 lg:px-16 xl:px-24 ${marginY}`}>
       <div className="flex mb-4">
         {title && (
           <div className="flex items-center">
