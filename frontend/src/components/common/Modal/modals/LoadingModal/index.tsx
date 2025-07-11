@@ -1,5 +1,4 @@
 // src/components/common/LoadingModal.tsx
-import { createPortal } from "react-dom";
 import ModalPortal from "../../ModalPortal";
 
 export default function LoadingModal({ show }: { show: boolean }) {
